@@ -1,0 +1,46 @@
+body {
+    overflow-x: hidden;
+}
+
+.navbar {
+    background-color: #1fab89;
+}
+
+.container-jumbotron {
+    padding-top: 6rem;
+    background-color: #8ad3c162;
+}
+
+.myName {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+}
+
+.myProfession {
+    font-family: Arial;
+    color: rgba(114, 112, 112, 0.933)
+}
+
+.about {
+    padding-top: 6rem;
+    background-color: #00cba9;
+    color: rgba(80, 78, 78, 0.933);
+}
+
+.skills {
+    padding-top: 6rem;
+    background-color: #f3f4f5;
+}
+
+.contact {
+    padding-top: 6rem;
+}
+
+.copyright {
+    background-color: #00cba9;
+}
+
+footer {
+    margin-bottom: -16px;
+    background-color: #00cba9;
+}
