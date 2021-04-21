@@ -9,6 +9,7 @@ body {
 .container-jumbotron {
     padding-top: 6rem;
     background-color: #8ad3c162;
+    padding-bottom: 15rem;
 }
 
 .myName {
@@ -18,22 +19,31 @@ body {
 
 .myProfession {
     font-family: Arial;
-    color: rgba(114, 112, 112, 0.933)
+    color: rgba(114, 112, 112, 0.933);
 }
 
 .about {
     padding-top: 6rem;
-    background-color: #00cba9;
+    background-color: #f3f4f5;
     color: rgba(80, 78, 78, 0.933);
 }
 
 .skills {
     padding-top: 6rem;
-    background-color: #f3f4f5;
+    background-color: #a5aca6;
+}
+
+.card {
+    margin: 5px;
+}
+
+.experience {
+    color: rgba(114, 112, 112, 0.933);
 }
 
 .contact {
     padding-top: 6rem;
+    background-color: #f3f4f5;
 }
 
 .copyright {
@@ -43,4 +53,13 @@ body {
 footer {
     margin-bottom: -16px;
     background-color: #00cba9;
+}
+
+.bi {
+    text-decoration: none;
+    margin: 7px;
+}
+
+.bi:hover {
+    color: #6f7072
 }
