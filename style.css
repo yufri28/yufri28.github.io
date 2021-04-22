@@ -8,7 +8,7 @@ body {
 
 .container-jumbotron {
     padding-top: 6rem;
-    background-color: #8ad3c162;
+    background-color: #b4ccc662;
     padding-bottom: 15rem;
 }
 
@@ -47,6 +47,7 @@ body {
 }
 
 .copyright {
+    margin-top: -25px;
     background-color: #00cba9;
 }
 
