@@ -8,31 +8,31 @@
     <link href="./dist/css/final.css" rel="stylesheet" />
     <link href="./dist/lightbox2/css/lightbox.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      content: [
-          'index.html',
-        ],
-        darkMode: 'class',
-        theme: {
-          container: {
-            center: true,
-            padding: '16px',
-          },
-          extend: {
-            colors: {
-              primary: '#0C7B92',
-              secondary: '#64748b',
-              dark: '#0f172a',
+    <script>
+      tailwind.config = {
+        content: [
+            '',
+          ],
+          darkMode: 'class',
+          theme: {
+            container: {
+              center: true,
+              padding: '16px',
             },
-            screens: {
-              '2xl': '1320px',
+            extend: {
+              colors: {
+                primary: '#0C7B92',
+                secondary: '#64748b',
+                dark: '#0f172a',
+              },
+              screens: {
+                '2xl': '1320px',
+              },
             },
           },
-        },
-        plugins: [],
-    }
-  </script>
+          plugins: [],
+      }
+    </script>
     <script>
       if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
