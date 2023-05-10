@@ -5,7 +5,7 @@ function search() {
 
   // Load the database file
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "kamus.txt", false);
+  xhr.open("GET", "./kamus-bahasa-rote/kamus.txt", false);
   xhr.send(null);
 
   var lines = xhr.responseText.split("\n");
