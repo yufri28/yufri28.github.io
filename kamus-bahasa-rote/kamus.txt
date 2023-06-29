@@ -82,3 +82,7 @@ Tasi,laut
 Banggu,bangku
 Ndu',bintang
 Fulan,bulan
+buna,bunga
+lamatuak,Tuhan
+man,yang
+fe,beri
