@@ -167,10 +167,10 @@
         })
           .then((response) => {
             // myAlert.classList.toggle("d-none");
+            form.reset();
             btnKirim.classList.toggle('d-none');
             btnLoading.classList.toggle('d-none');
             alert("Data berhasil ditambahkan!");
-            form.reset();
             console.log("Success!", response);
           })
           .catch((error) => console.error("Error!", error.message));
