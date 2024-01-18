@@ -143,7 +143,22 @@
                     tanggal.getFullYear();
                   td.textContent = tanggalStr;
                   tr.appendChild(td);
-                } else {
+                } else if (header == "Tanggal Lahir") {
+                  // Tanggal awal dalam format ISO
+                  var tanggalISO = row[header];
+                  // Membuat objek Date dari tanggal ISO
+                  var tanggal = new Date(tanggalISO);
+                  // Mendapatkan tanggal, bulan, dan tahun
+                  var tanggalStr =
+                    tanggal.getDate() +
+                    "/" +
+                    (tanggal.getMonth() + 1) +
+                    "/" +
+                    tanggal.getFullYear();
+                  td.textContent = tanggalStr;
+                  tr.appendChild(td);
+                }
+                else {
                   td.textContent = row[header];
                   tr.appendChild(td);
                 }
