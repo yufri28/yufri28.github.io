@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Huruf</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #resultContainer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #randomCircle {
+            display: none;
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: #fff;
+            font-size: 124px;
+            margin-bottom: 20px;
+            transition: background-color 0.5s;
+        }
+
+        #generateBtn {
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 94px;
+        }
+
+        #generateBtn:hover,
+        #resetBtn:hover {
+            background-color: #2980b9;
+        }
+
+        #resetBtn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="text-center">
+    <div class="container">
+        <!-- <h1 class="mt-5">Random Huruf</h1> -->
+        <div id="resultContainer">
+            <div id="randomCircle"></div>
+            <button id="generateBtn" class="btn btn-primary" onclick="generateRandomLetter()">Klik</button>
+            <div id="loading" style="display: none;">Loading...</div>
+        </div>
+        <button id="resetBtn" class="btn btn-secondary" onclick="resetRandomLetter()"
+            style="display: none;">Reset</button>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function generateRandomLetter() {
+            // Menampilkan loading dan menyembunyikan tombol generate
+            document.getElementById('loading').style.display = 'inline-block';
+            document.getElementById('generateBtn').style.display = 'none';
+
+            // Set timeout untuk mensimulasikan proses yang memakan waktu
+            setTimeout(function () {
+                // Array huruf alfabet
+                var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+                // Mendapatkan huruf acak
+                var randomLetter = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+
+                // Mendapatkan warna acak
+                var randomColor = getRandomColor();
+
+                // Menampilkan bulatan dan hasil huruf
+                var randomCircle = document.getElementById('randomCircle');
+                randomCircle.innerText = randomLetter;
+                randomCircle.style.backgroundColor = randomColor;
+                randomCircle.style.display = 'inline-block';
+
+                // Menampilkan tombol reset dan menyembunyikan loading
+                document.getElementById('resetBtn').style.display = 'inline-block';
+                document.getElementById('loading').style.display = 'none';
+            }, 1000); // Mengatur waktu delay dalam milidetik (1 detik)
+        }
+
+        function resetRandomLetter() {
+            // Menyembunyikan bulatan, tombol reset, dan menyembunyikan loading
+            var randomCircle = document.getElementById('randomCircle');
+            randomCircle.style.display = 'none';
+            document.getElementById('resetBtn').style.display = 'none';
+            document.getElementById('loading').style.display = 'none';
+
+            // Menampilkan tombol generate
+            document.getElementById('generateBtn').style.display = 'inline-block';
+        }
+
+        function getRandomColor() {
+            // Menghasilkan warna acak dalam format hexadecimal
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+
+</html>
