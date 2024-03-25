@@ -8,9 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Sertakan CSS DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <!-- Memuat jQuery dari CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>CCA - GMIT YEGAR SAHADUTA OSMO 2022</title>
+    <title>RANKING 1 - GMIT YEGAR SAHADUTA OSMO 2024</title>
     <style>
         #demo {
             text-align: center;
@@ -61,10 +63,10 @@
                     <div class="">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
-                            +TAMBAH TIM
+                            +TAMBAH SOAL
                         </button>
-                        <a href="./kompetisi-selesai.php" class="btn btn-success">
-                            KOMPETISI SELESAI
+                        <a href="./soal.html" class="btn btn-success">
+                            Tampilkan Soal
                         </a>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
                     <div class="col-md-12">
                         <div class="card text-center">
                             <div class="card-header">
-                                <h1><strong> CCA </strong></h1>
+                                <h1><strong> RANKING 1 </strong></h1>
                             </div>
                             <div class="card-body">
                                 <div class="timer"></div>
@@ -89,30 +91,6 @@
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center" id="container">
-                            <!-- <div class="col-sm-6 p-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h2 class="card-title" id="nama-tim"><strong>Regu 1</strong></h2>
-                                        <a href="./hapus.php?id=" class="btn btn-warning"><svg
-                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                            </svg></a>
-                                        <hr>
-                                        <h2 class="card-text">Poin</h2>
-                                        <h1>
-                                            <strong class="card-text" id="poin">0</strong>
-                                        </h1>
-                                        <a href="./update-poin.php?mod=tambah&&poin=100&&id="
-                                            class="btn btn-primary">+100</a>
-                                        <a href="./update-poin.php?mod=kurang&&poin=100&&id="
-                                            class="btn btn-danger">-100</a>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -125,18 +103,23 @@
         <form name="kmf-contact-form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah TIM</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Soal</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Nama TIM</label>
-                            <input type="text" autofocus='true' name="NAMA" class="form-control" id="NAMA"
-                                placeholder="Nama Tim">
-                            <input type="hidden" autofocus='true' name="ID" class="form-control" id="ID">
-                            <input type="hidden" value="0" name="POIN" class="form-control" id="POIN">
-                            <input type="hidden" value="0" name="WIN" class="form-control" id="WIN">
+                            <label for="exampleFormControlInput1" class="form-label">No</label>
+                            <input type="text" readonly autofocus='true' name="No" class="form-control" id="No">
+                            <input type="text" autofocus='true' value="add" class="form-control" id="mod">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Soal</label>
+                            <textarea class="form-control" id="Soal" name="Soal" rows="5" cols="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Jawaban</label>
+                            <textarea class="form-control" id="Jawaban" name="Jawaban" rows="5" cols="10"></textarea>
                         </div>
                     </div>
                 </div>
@@ -148,15 +131,25 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Sertakan jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- Sertakan library DataTables -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script>
+
     const scriptURLGet =
-        "https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec";
+        "https://script.google.com/macros/s/AKfycbyUTyonCyBuNThfW724ffzruoKi-VTKdvkQSRrU9kjRNQoc6o3x6IEKsfG_YCpwO-Y/exec";
     const namaTim = document.getElementById("nama-tim");
     const poin = document.getElementById("poin");
-    const ID = document.getElementById("ID");
-    let tampungID = 0;
+    const No = document.getElementById("No");
+    let tampungNo = 0;
+
+    // Ambil elemen container
+    const container = document.getElementById('container');
+    let table = '';
+
     // ===============================================
-    // ==================== Tampilkan data =================
+    // ================ Tampilkan data ===============
     // ===============================================
 
     fetch(scriptURLGet, {
@@ -167,121 +160,69 @@
             if (data.length != 0) {
                 // Mendapatkan header dari data pertama
                 const headers = Object.keys(data[0]);
-
+                table += `
+                    <table class="table table-striped" id="tables">
+                        <thead>
+                            <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Soal</th>
+                            <th scope="col">Jawaban</th>
+                            <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                    <tbody>`;
                 // Looping CARD
                 data.forEach((row) => {
-                    // Ambil elemen container
-                    const container = document.getElementById('container');
-                    // Looping untuk setiap data dalam array
-                    // Buat elemen col-sm-6
-                    const col = document.createElement('div');
-                    col.className = 'col-sm-6 p-2';
-
-                    // Buat elemen card
-                    const card = document.createElement('div');
-                    card.className = 'card';
-
-                    // Buat elemen card-body
-                    const cardBody = document.createElement('div');
-                    cardBody.className = 'card-body';
-
-                    // Buat elemen h2 untuk nama tim
-                    const namaTim = document.createElement('h2');
-                    namaTim.className = 'card-title';
-                    namaTim.innerHTML = `<strong>${row.NAMA}</strong>`;
-
-                    // Buat elemen link untuk hapus
-                    const deleteLink = document.createElement('a');
-                    deleteLink.href = `./hapus.php?id=${row.ID}`;
-                    deleteLink.className = 'btn btn-warning';
-                    deleteLink.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>`;
-
-                    // Buat elemen hr
-                    const hr = document.createElement('hr');
-
-                    // Buat elemen h2 untuk poin
-                    const poin = document.createElement('h2');
-                    poin.className = 'card-text';
-                    poin.textContent = 'Poin';
-
-                    // Buat elemen strong untuk nilai poin
-                    const poinValue = document.createElement('strong');
-                    poinValue.className = 'card-text';
-                    poinValue.textContent = row.POIN;
-                    poinValue.style.fontSize = '50pt';
-
-                    // Buat elemen h2 untuk poin
-                    const br = document.createElement('br');
-
-                    // Buat elemen link untuk menambah poin
-                    const tambahPoinLink = document.createElement('a');
-                    tambahPoinLink.href = ``;
-                    tambahPoinLink.className = 'btn btn-primary';
-                    tambahPoinLink.textContent = '+100';
-
-                    // Tambahkan event listener
-                    tambahPoinLink.addEventListener('click', function (event) {
-                        event.preventDefault(); // Mencegah perilaku default dari link
-                        updatePoin('tambah',row.NAMA, 100, row.WIN, row.ID); // Memanggil fungsi untuk memperbarui poin
-                    });
-
-                    // Buat elemen link untuk mengurangi poin
-                    const kurangPoinLink = document.createElement('a');
-                    kurangPoinLink.href = ``;
-                    kurangPoinLink.className = 'btn btn-danger';
-                    kurangPoinLink.textContent = '-100';
-
-                    // Tambahkan event listener
-                    kurangPoinLink.addEventListener('click', function (event) {
-                        event.preventDefault(); // Mencegah perilaku default dari link
-                        updatePoin('kurang',row.NAMA, 100, row.WIN, row.ID); // Memanggil fungsi untuk memperbarui poin
-                    });
-
-
-                    // Menggabungkan elemen-elemen
-                    cardBody.appendChild(namaTim);
-                    cardBody.appendChild(deleteLink);
-                    cardBody.appendChild(hr);
-                    cardBody.appendChild(poin);
-                    cardBody.appendChild(poinValue);
-                    cardBody.appendChild(br);
-                    cardBody.appendChild(tambahPoinLink);
-                    cardBody.appendChild(kurangPoinLink);
-                    card.appendChild(cardBody);
-                    col.appendChild(card);
-                    container.appendChild(col);
+                    table += `
+                    <tr>
+                        <th scope="row">${row.No}</th>
+                        <td>${row.Soal}</td>
+                        <td>${row.Jawaban}</td>
+                        <td data-id="${row.No}">
+                            <button type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" id="edit-soal" class="btn btn-primary">Edit</button>
+                        </td>
+                    </tr>`;
+                    tampungNo = row.No + 1
                 });
 
-                tampungID = data.length
+                table += `
+                    </tbody>
+                </table>`;
+                container.innerHTML = table;
+                $(document).ready(function () {
+                    $('#tables').DataTable();
+                });
             } else {
                 msgEmptyData.classList.remove("d-none");
             }
-            ID.value = tampungID + 1;
+            No.value = tampungNo
+
+            console.log(No)
         })
         .catch((error) => console.error("Error!", error.message));
 
 
     //================================================
-    // =============== Tambah Tim ====================
+    // =============== Tambah Soal ====================
     //================================================
     const form = document.forms["kmf-contact-form"];
-    console.log(form);
     form.addEventListener("submit", (e) => {
-        scriptUrlCreate = 'https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec'
+        scriptUrlCreate = 'https://script.google.com/macros/s/AKfycbyUTyonCyBuNThfW724ffzruoKi-VTKdvkQSRrU9kjRNQoc6o3x6IEKsfG_YCpwO-Y/exec'
         e.preventDefault();
 
-        const namaTeamInput = form.querySelector("#NAMA"); // Mendapatkan input Nama TIM
-        const idInput = form.querySelector("#ID"); // Mendapatkan input ID
-        const namaTeamValue = namaTeamInput.value; // Mendapatkan nilai input Nama TIM
-        const idValue = idInput.value; // Mendapatkan nilai input ID
+        let noRow = form.querySelector("#No");
+        let soal = form.querySelector("#Soal"); 
+        let jawaban = form.querySelector("#Jawaban"); 
 
-        const dataToSend = {
+        let dataToSend = {
             mod: 'add',
-            nama: namaTeamValue,
-            poin: 0,
-            win: 0,
-            id: idValue
+            No: noRow.value,
+            Soal: soal.value,
+            Jawaban: jawaban.value
         };
+
+        console.log(dataToSend)
 
         fetch(scriptUrlCreate, {
             method: "POST",
@@ -298,11 +239,42 @@
     });
 
 
+     //================================================
+    // =============== Edit Soal ====================
+    //================================================
+
+    const buttonEditSoal = document.getElementById('edit-soal');
+    let dataId = 0;
+    let mod = form.querySelector("#mod");
+    let noRow = form.querySelector("#No");
+    let soal = form.querySelector("#Soal"); 
+    let jawaban = form.querySelector("#Jawaban");
+
+    container.addEventListener("click", (e) => {
+        e.preventDefault();
+        dataId = e.target.parentElement.dataset.id
+        
+        fetch(scriptURLGet, {
+            method: "GET"
+        }).then((response) => response.json())
+        .then(data => {
+            data.forEach((row) =>{
+                if(row.No == dataId){
+                    mod.value = 'edit'
+                    noRow.value = row.No
+                    soal.value = row.Soal
+                    jawaban.value = row.Jawaban
+                }
+            });
+        }).catch(err => console.log(err));
+    });
+
+
 
     // const msgEmptyData = document.getElementById("empty-data");
     // Fungsi untuk mengirim permintaan pembaruan poin ke Google Apps Script
     function updatePoin(mod, namaTeamValue, poin, win, id) {
-        const scriptURL = "https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec";
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyUTyonCyBuNThfW724ffzruoKi-VTKdvkQSRrU9kjRNQoc6o3x6IEKsfG_YCpwO-Y/exec";
 
         const dataToSend = {
             mod: mod,
@@ -339,6 +311,7 @@
 
         // window.location.href = '';
     }
+
 
 
 </script>
