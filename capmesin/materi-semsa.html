@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF to JPG Carousel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="carouselExampleIndicators"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators" id="indicators"></div>
+      <div class="carousel-inner" id="carouselInner"></div>
+      <div id="countdown" class="carousel-caption text-dark"></div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <a
+        id="btnLatihan"
+        class="btn btn-primary mt-3 col-6"
+        style="display: none"
+        href="latihan1.html"
+        >Mulai Latihan</a
+      >
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function convertPDFToJPG() {
+        var getUrl = window.location.search.substr(1);
+        var fileName = getUrl.split("=")[1]; // Assuming the parameter name is 'p'
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "./Materi/" + fileName, true);
+        xhr.responseType = "arraybuffer";
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            var pdfData = new Uint8Array(xhr.response);
+
+            pdfjsLib
+              .getDocument(pdfData)
+              .promise.then(function (pdf) {
+                var totalPages = pdf.numPages;
+                var pageNumber = 1; // Set initial page number
+
+                function renderPage(pageNumber) {
+                  pdf.getPage(pageNumber).then(function (page) {
+                    var scale = 1.5;
+                    var viewport = page.getViewport({ scale: scale });
+
+                    var canvas = document.createElement("canvas");
+                    var context = canvas.getContext("2d");
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                      canvasContext: context,
+                      viewport: viewport,
+                    };
+
+                    page.render(renderContext).promise.then(function () {
+                      var imageURL = canvas.toDataURL("image/jpeg");
+                      var carouselItem = document.createElement("div");
+                      carouselItem.className = "carousel-item";
+                      if (pageNumber === 1) {
+                        carouselItem.classList.add("active");
+                      }
+                      carouselItem.innerHTML = `<img src="${imageURL}" class="d-block w-100">`;
+
+                      document
+                        .getElementById("carouselInner")
+                        .appendChild(carouselItem);
+
+                      var indicator = document.createElement("button");
+                      indicator.type = "button";
+                      indicator.setAttribute(
+                        "data-bs-target",
+                        "#carouselExampleIndicators"
+                      );
+                      indicator.setAttribute(
+                        "data-bs-slide-to",
+                        pageNumber - 1
+                      );
+                      if (pageNumber === 1) {
+                        indicator.classList.add("active");
+                      }
+                      document
+                        .getElementById("indicators")
+                        .appendChild(indicator);
+
+                      // Render next page if available
+                      if (pageNumber < totalPages) {
+                        renderPage(pageNumber + 1);
+                      }
+                    });
+                  });
+                }
+
+                renderPage(pageNumber); // Start rendering pages
+              })
+              .catch(function (error) {
+                console.error("Error loading PDF:", error);
+              });
+
+            // Countdown timer
+            var countDownDate = getCookie(fileName);
+            if (!countDownDate) {
+              countDownDate = new Date().getTime() + 600000; // 10 minutes from now
+              setCookie(fileName, countDownDate, 1); // Cookie expires in 1 day
+            } else {
+              countDownDate = parseInt(countDownDate);
+            }
+
+            var x = setInterval(function () {
+              var now = new Date().getTime();
+              var distance = countDownDate - now;
+              var minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+              );
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+              document.getElementById("countdown").innerHTML =
+                "Time left: " + minutes + "m " + seconds + "s ";
+
+              if (distance <= 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+                document.getElementById("btnLatihan").style.display = "block";
+              }
+            }, 1000);
+          } else {
+            console.error("Failed to fetch PDF:", xhr.statusText);
+          }
+        };
+
+        xhr.send();
+      }
+
+      window.onload = convertPDFToJPG;
+    </script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
