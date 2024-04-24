@@ -49,28 +49,28 @@
     <script src="./assets/global/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script>
-      // function setCookie(cname, cvalue, exdays) {
-      //   var d = new Date();
-      //   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-      //   var expires = "expires=" + d.toUTCString();
-      //   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      // }
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
 
-      // function getCookie(cname) {
-      //   var name = cname + "=";
-      //   var decodedCookie = decodeURIComponent(document.cookie);
-      //   var ca = decodedCookie.split(";");
-      //   for (var i = 0; i < ca.length; i++) {
-      //     var c = ca[i];
-      //     while (c.charAt(0) == " ") {
-      //       c = c.substring(1);
-      //     }
-      //     if (c.indexOf(name) == 0) {
-      //       return c.substring(name.length, c.length);
-      //     }
-      //   }
-      //   return "";
-      // }
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
 
       function convertPDFToJPG() {
         var getUrl = window.location.search.substr(1);
@@ -148,18 +148,17 @@
               .catch(function (error) {
                 console.error("Error loading PDF:", error);
               });
-            
-              // Countdown timer
-              var countDownDate = getCookie(fileName);
-              var progressName = fileName+"prgs";
-              
+
+            // Countdown timer
+            var countDownDate = getCookie(fileName);
+
             if (!countDownDate) {
               countDownDate = new Date().getTime() + 600000; // 10 minutes from now
               setCookie(fileName, countDownDate, 1); // Cookie expires in 1 day
-              setCookie(progressName, 100, 1); // Cookie expires in 1 day
             } else {
               countDownDate = parseInt(countDownDate);
             }
+
             var x = setInterval(function () {
               var now = new Date().getTime();
               var distance = countDownDate - now;
