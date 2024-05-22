@@ -86,3 +86,17 @@ buna,bunga
 lamatuak,Tuhan
 man,yang
 fe,beri
+mbila,besok
+rulu,timur
+muri,barat
+di,utara
+ona,selatan
+nambruna,gemukan
+relo,matahari
+nisi,gigi
+tiku,patah
+nudu,bibir
+fulaka,bulan ke
+
+
+
