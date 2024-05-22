@@ -99,6 +99,7 @@ nudu,bibir
 fulaka,bulan ke
 no,dengan
 ruma,sebagian
+poke,buta
 
 
 
