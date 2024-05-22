@@ -97,6 +97,8 @@ nisi,gigi
 tiku,patah
 nudu,bibir
 fulaka,bulan ke
+no,dengan
+
 
 
 
