@@ -103,6 +103,34 @@
         text-align: center;
         font-family: "Poppins", sans-serif;
       }
+
+      .sad-emot {
+        font-size: 100px; /* Size of the emoticon */
+        color: #00f; /* Blue color for sad emoticon */
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        animation: appear 1s ease-in-out, 2s 1s linear forwards;
+        /* 'appear' animation to show the emoticon, 'fall' animation to make it fall */
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: scale(0);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
     </style>
   </head>
   <body>
@@ -208,22 +236,22 @@
           if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
             switch (i.value) {
               case 1:
-                value = 'Kereta';
+                value = 'Kereta🥹😢';
                 break;
               case 2:
-                value = 'Uang';
+                value = 'Uang🥹😢';
                 break;
               case 3:
-                value = 'Hamba';
+                value = 'Hamba🥹😢';
                 break;
               case 4:
-                value = 'Hikmat';
+                value = 'Hikmat😃😁';
                 break;
               case 5:
-                value = 'Iman';
+                value = 'Iman🥹😢';
                 break;
               case 6:
-                value = 'Umur Panjang';
+                value = 'Umur Panjang🥹😢';
                 break;
             }
             finalValue.innerHTML = `<p>Jawaban: ${value}</p>`;
