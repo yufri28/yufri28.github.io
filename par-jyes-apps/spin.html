@@ -1,0 +1,299 @@
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PART J-YES OSMO</title>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #c3a3f1, #6414e9);
+      }
+      .wrapper {
+        width: 90%;
+        max-width: 34.37em;
+        max-height: 90vh;
+        background-color: #ffffff;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        padding: 3em;
+        border-radius: 1em;
+        box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
+      }
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      #wheel {
+        max-height: inherit;
+        width: inherit;
+        top: 0;
+        padding: 0;
+      }
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      #spin-btn {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        height: 26%;
+        width: 26%;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 0;
+        background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
+        color: #c66e16;
+        text-transform: uppercase;
+        font-size: 1.8em;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+      #panah {
+        position: absolute;
+        width: 4em;
+        top: 45%;
+        right: -8%;
+        color: #fdcf3b;
+      }
+
+      .svg{
+        margin: 10px;
+      }
+
+      #final-value {
+        font-size: 1.5em;
+        text-align: center;
+        margin-top: 1.5em;
+        color: #202020;
+        font-weight: 500;
+      }
+
+      #quest {
+        font-size: 1.5em;
+        text-align: center;
+        color: #202020;
+        font-weight: 500;
+      }
+      @media screen and (max-width: 768px) {
+        .wrapper {
+          font-size: 12px;
+        }
+        img {
+          right: -5%;
+        }
+      }
+      h1{
+        color: white;
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .sad-emot {
+        font-size: 100px; /* Size of the emoticon */
+        color: #00f; /* Blue color for sad emoticon */
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        animation: appear 1s ease-in-out, 2s 1s linear forwards;
+        /* 'appear' animation to show the emoticon, 'fall' animation to make it fall */
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: scale(0);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>PART J-YES OSMO</h1>
+    <div class="wrapper">
+      <div id="quest">
+        <p>Yang diminta Raja Salomo kepada Tuhan adalah ...</p>
+      </div>
+      <div class="container">
+        <canvas id="wheel"></canvas>
+        <button id="spin-btn"><div class="svg">
+        <svg id="Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><style>.cls-1{fill:#45413c;opacity:0.15;}.cls-2{fill:#ebcb00;}.cls-2,.cls-5,.cls-9{stroke:#45413c;stroke-linecap:round;stroke-linejoin:round;}.cls-3{fill:#ffe500;}.cls-4{fill:#fff48c;}.cls-5{fill:none;}.cls-6,.cls-9{fill:#ff6242;}.cls-7{fill:#e04122;}.cls-8{fill:#ff866e;}.cls-10{fill:#c0dceb;}.cls-11{fill:#e8f4fa;}</style></defs><title>433-crown</title><g id="_Group_" data-name="&lt;Group&gt;"><ellipse id="_Ellipse_" data-name="&lt;Ellipse&gt;" class="cls-1" cx="24" cy="43.5" rx="17" ry="1.5"/><g id="_Group_2" data-name="&lt;Group&gt;"><path id="_Path_" data-name="&lt;Path&gt;" class="cls-2" d="M19,24.5c-1.8-1.73-3.35-6.27-4.53-9.66a.5.5,0,0,0-.94,0C12.35,18.23,10.8,22.77,9,24.5Z"/><path id="_ ath_2" data-name="&lt;Path&gt;" class="cls-2" d="M29,24.5c1.8-1.73,3.35-6.27,4.53-9.66a.5.5,0,0,1,.94,0c1.18,3.39,2.73,7.93,4.53,9.66Z"/><g id="_Group_3" data-name="&lt;Group&gt;"><path id="_Path_3" data-name="&lt;Path&gt;" class="cls-3" d="M23.54,11.72a.49.49,0,0,1,.92,0c1.34,3.41,5.36,12.78,9,12.78,3.17,0,6.35-4.48,7.94-7.12a.51.51,0,0,1,.93.3L41.5,32c0,3.59-7.84,6.5-17.5,6.5S6.5,35.59,6.5,32L5.63,17.68a.51.51,0,0,1,.93-.3C8.15,20,11.33,24.5,14.5,24.5,18.18,24.5,22.2,15.13,23.54,11.72Z"/><path id="_Path_4" data-name="&lt;Path&gt;" class="cls-4" d="M12.39,36.86,28.78,20.47a52.56,52.56,0,0,1-4.32-8.75.49.49,0,0,0-.92,0c-1.34,3.41-5.36,12.78-9,12.78-3.17,0-6.35-4.48-7.94-7.12a.51.51,0,0,0-.93.3L6.5,32C6.5,33.93,8.79,35.66,12.39,36.86Z"/><path id="_Path_5" data-name="&lt;Path&gt;" class="cls-5" d="M23.54,11.72a.49.49,0,0,1,.92,0c1.34,3.41,5.36,12.78,9,12.78,3.17,0,6.35-4.48,7.94-7.12a.51.51,0,0,1,.93.3L41.5,32c0,3.59-7.84,6.5-17.5,6.5S6.5,35.59,6.5,32L5.63,17.68a.51.51,0,0,1,.93-.3C8.15,20,11.33,24.5,14.5,24.5,18.18,24.5,22.2,15.13,23.54,11.72Z"/></g><g id="_Group_4" data-name="&lt;Group&gt;"><path id="_Path_6" data-name="&lt;Path&gt;" class="cls-6" d="M27.5,28a3.5,3.5,0,0,0-7,0v2a3.5,3.5,0,0,0,7,0Z"/><path id="_Path_7" data-name="&lt;Path&gt;" class="cls-7" d="M24,32a3.5,3.5,0,0,1-3.5-3.5V30a3.5,3.5,0,0,0,7,0V28.5A3.5,3.5,0,0,1,24,32Z"/><path id="_Path_8" data-name="&lt;Path&gt;" class="cls-8" d="M24,24.5A3.5,3.5,0,0,0,20.5,28v2a1.9,1.9,0,0,0,0,.25,3.48,3.48,0,0,1,6.94,0,1.9,1.9,0,0,0,0-.25V28A3.5,3.5,0,0,0,24,24.5Z"/><path id="_Path_9" data-name="&lt;Path&gt;" class="cls-5" d="M27.5,28a3.5,3.5,0,0,0-7,0v2a3.5,3.5,0,0,0,7,0Z"/></g><circle id="_Ellipse_2" data-name="&lt;Ellipse&gt;" class="cls-9" cx="35.5" cy="29.5" r="2"/><circle id="_Ellipse_3" data-name="&lt;Ellipse&gt;" class="cls-9" cx="12.5" cy="29.5" r="2"/><g id="_Group_5" data-name="&lt;Group&gt;"><path id="_Path_10" data-name="&lt;Path&gt;" class="cls-10" d="M6.5,37c0,3.59,7.84,6.5,17.5,6.5S41.5,40.59,41.5,37V32c0,3.59-7.84,6.5-17.5,6.5S6.5,35.59,6.5,32Z"/><path id="_Path_11" data-name="&lt;Path&gt;" class="cls-11" d="M24,38.5c-9.66,0-17.5-2.91-17.5-6.5v2.5C6.5,38.09,14.34,41,24,41s17.5-2.91,17.5-6.5V32C41.5,35.59,33.66,38.5,24,38.5Z"/><path id="_Path_12" data-name="&lt;Path&gt;" class="cls-5" d="M6.5,37c0,3.59,7.84,6.5,17.5,6.5S41.5,40.59,41.5,37V32c0,3.59-7.84,6.5-17.5,6.5S6.5,35.59,6.5,32Z"/></g><g id="_Group_6" data-name="&lt;Group&gt;"><circle id="_Ellipse_4" data-name="&lt;Ellipse&gt;" class="cls-6" cx="14" cy="12.5" r="2.5"/><path id="_Path_13" data-name="&lt;Path&gt;" class="cls-8" d="M12.23,14.27a2.5,2.5,0,0,1,3.54-3.54Z"/><circle id="_Ellipse_5" data-name="&lt;Ellipse&gt;" class="cls-5" cx="14" cy="12.5" r="2.5"/></g><g id="_Group_7" data-name="&lt;Group&gt;"><circle id="_Ellipse_6" data-name="&lt;Ellipse&gt;" class="cls-6" cx="34" cy="12.5" r="2.5"/><path id="_Path_14" data-name="&lt;Path&gt;" class="cls-8" d="M32.23,14.27a2.5,2.5,0,0,1,3.54-3.54Z"/><circle id="_Ellipse_7" data-name="&lt;Ellipse&gt;" class="cls-5" cx="34" cy="12.5" r="2.5"/></g><g id="_Group_8" data-name="&lt;Group&gt;"><circle id="_Ellipse_8" data-name="&lt;Ellipse&gt;" class="cls-6" cx="5.5" cy="14.5" r="3"/><path id="_Path_15" data-name="&lt;Path&gt;" class="cls-8" d="M3.38,16.62a3,3,0,0,1,4.24-4.24Z"/><circle id="_Ellipse_9" data-name="&lt;Ellipse&gt;" class="cls-5" cx="5.5" cy="14.5" r="3"/></g><g id="_Group_9" data-name="&lt;Group&gt;"><circle id="_Ellipse_10" data-name="&lt;Ellipse&gt;" class="cls-6" cx="24" cy="9.5" r="3"/><path id="_Path_16" data-name="&lt;Path&gt;" class="cls-8" d="M21.88,11.62a3,3,0,0,1,4.24-4.24Z"/><circle id="_Ellipse_11" data-name="&lt;Ellipse&gt;" class="cls-5" cx="24" cy="9.5" r="3"/></g><g id="_Group_10" data-name="&lt;Group&gt;"><circle id="_Ellipse_12" data-name="&lt;Ellipse&gt;" class="cls-6" cx="42.5" cy="14.5" r="3"/><path id="_Path_17" data-name="&lt;Path&gt;" class="cls-8" d="M40.38,16.62a3,3,0,1,1,4.24-4.24Z"/><circle id="_Ellipse_13" data-name="&lt;Ellipse&gt;" class="cls-5" cx="42.5" cy="14.5" r="3"/></g></g></g></svg></div></button>
+        <svg
+          id="panah"
+          xmlns="http://www.w3.org/2000/svg"
+          width="50"
+          height="50"
+          fill="currentColor"
+          class="bi bi-caret-left-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"
+          />
+        </svg>
+      </div>
+      <div id="final-value">
+        <p>Klik di mahkota untuk memulai</p>
+      </div>
+    </div>
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Chart JS Plugin for displaying text over chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
+    <!-- Script -->
+    <script>
+      const wheel = document.getElementById("wheel");
+      const spinBtn = document.getElementById("spin-btn");
+      const finalValue = document.getElementById("final-value");
+      //Object that stores values of minimum and maximum angle for a value
+      const rotationValues = [
+        { minDegree: 0, maxDegree: 30, value: 2 },
+        { minDegree: 31, maxDegree: 90, value: 1 },
+        { minDegree: 91, maxDegree: 150, value: 6 },
+        { minDegree: 151, maxDegree: 210, value: 5 },
+        { minDegree: 211, maxDegree: 270, value: 4 },
+        { minDegree: 271, maxDegree: 330, value: 3 },
+        { minDegree: 331, maxDegree: 360, value: 2 },
+      ];
+      //Size of each piece
+      const data = [16, 16, 16, 16, 16, 16];
+      //background color for each piece
+      var pieColors = [
+        "#8b35bc",
+        "#b163da",
+        "#8b35bc",
+        "#b163da",
+        "#8b35bc",
+        "#b163da",
+      ];
+      //Create chart
+      let myChart = new Chart(wheel, {
+        //Plugin for displaying text on pie chart
+        plugins: [ChartDataLabels],
+        //Chart Type Pie
+        type: "pie",
+        data: {
+          //Labels(values which are to be displayed on chart)
+          labels: ["Kereta", "Uang", "Hamba", "Hikmat", "Iman", "Umur \nPanjang"],
+          //Settings for dataset/pie
+          datasets: [
+            {
+              backgroundColor: pieColors,
+              data: data,
+            },
+          ],
+        },
+        options: {
+          //Responsive chart
+          responsive: true,
+          animation: { duration: 0 },
+          plugins: {
+            //hide tooltip and legend
+            tooltip: false,
+            legend: {
+              display: false,
+            },
+            //display labels inside pie chart
+            datalabels: {
+              color: "#ffffff",
+              formatter: (_, context) =>
+                context.chart.data.labels[context.dataIndex],
+              font: { size: 24 },
+            },
+          },
+        },
+      });
+      //display value based on the randomAngle
+      const valueGenerator = (angleValue) => {
+        let value = "";
+        for (let i of rotationValues) {
+          //if the angleValue is between min and max then display it
+          if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+            switch (i.value) {
+              case 1:
+                value = 'Kereta👎';
+                break;
+              case 2:
+                value = 'Uang👎';
+                break;
+              case 3:
+                value = 'Hamba👎';
+                break;
+              case 4:
+                value = 'Hikmat👍';
+                break;
+              case 5:
+                value = 'Iman👎';
+                break;
+              case 6:
+                value = 'Umur Panjang👎';
+                break;
+            }
+            finalValue.innerHTML = `<p>Jawaban: ${value}</p>`;
+            spinBtn.disabled = false;
+            break;
+          }
+        }
+      };
+
+      //Spinner count
+      let count = 0;
+      //100 rotations for animation and last rotation for result
+      let resultValue = 101;
+      //Start spinning
+      spinBtn.addEventListener("click", () => {
+        spinBtn.disabled = true;
+        //Empty final value
+        finalValue.innerHTML = `<p>Good Luck!</p>`;
+        //Generate random degrees to stop at
+        let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+        //Interval for rotation animation
+        let rotationInterval = window.setInterval(() => {
+          //Set rotation for piechart
+          /*
+    Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
+    */
+          myChart.options.rotation = myChart.options.rotation + resultValue;
+          //Update chart with new value;
+          myChart.update();
+          //If rotation>360 reset it back to 0
+          if (myChart.options.rotation >= 360) {
+            count += 1;
+            resultValue -= 5;
+            myChart.options.rotation = 0;
+          } else if (count > 15 && myChart.options.rotation == randomDegree) {
+            valueGenerator(randomDegree);
+            clearInterval(rotationInterval);
+            count = 0;
+            resultValue = 101;
+          }
+        }, 10);
+      });
+    </script>
+  </body>
+</html>

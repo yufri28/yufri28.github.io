@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GVH</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image: url("./assets/images/landing.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      padding-top: 100px;
+      /* Add padding to the top of the body equal to the height of the header */
+    }
+
+    .header {
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      /* Fix the header position */
+      width: 100%;
+      /* Set the header width to 100% */
+      top: 0;
+      /* Position the header at the top of the viewport */
+      z-index: 1000;
+      /* Set a higher z-index to ensure the header appears above other content */
+    }
+
+    .menu-left,
+    .menu-right {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    .menu-left li,
+    .menu-right li {
+      margin-right: 20px;
+    }
+
+    /* Add some padding to the top of the content to account for the fixed header */
+    .content {
+      padding-top: 60px;
+      /* Adjust this value based on the height of your header */
+    }
+
+    .black-transparent-section {
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Black with 50% opacity */
+      min-height: 200px;
+      /* Adjust as needed */
+      margin-top: 30px;
+    }
+
+    .black-testimonial-section {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .black-cover-section {
+      background-image: url("./assets/images/bg.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .responsive-font {
+      font-size: calc(5vw + 5vh);
+    }
+
+    @media (min-width: 992px) {
+      .bg-body-lg-transparent {
+        background-color: rgba(255, 255, 255, 0.5);
+        /* Transparent white background */
+      }
+
+      .nav-link,
+      .navbar-brand {
+        color: white;
+      }
+
+      .nav-item,
+      .navbar-brand {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Atur bayangan teks sesuai kebutuhan */
+      }
+    }
+
+    .navbar {
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-scrolled {
+      background-color: #acadaa !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    }
+
+
+    .nav-item,
+    .navbar-brand {
+      font-family: "Roboto", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 991px) {
+      .bg-body-white {
+        background-color: white;
+        /* White background */
+      }
+    }
+
+
+    .start-trav-btn {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .roboto-400 {
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .sosial-link {
+      text-decoration: none;
+      color: white;
+      font-size: larger;
+    }
+
+    .link-card {
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: #909291;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-lg-trasparent bg-body-white">
+    <div class="container-fluid mx-lg-5">
+      <a class="navbar-brand" href="index.html">GVH</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse my-3" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto me-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <!-- <li class="nav-item">
+              <a class="nav-link" href="tourism.html">Tourism</a>
+            </li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tourism
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="./tourism.html#adventure">Adventur</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="./tourism.html#relaxing">Relaxing</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="./tourism.html#bussines">BUssines</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./plan-trip.html">Plan Trip</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item btn btn-outline-light me-1 py-1 px-4">
+            <a class="nav-link" aria-current="page" href="./login.html">Login</a>
+          </li>
+          <li class="nav-item btn btn-outline-light py-1 px-4">
+            <a class="nav-link" href="./login.html">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <section class="container-fluid px-4 px-lg-5 content">
+    <div class="row" style="border-left: 3px solid white">
+      <div class="col-lg-6 text-white">
+        <h1 class="responsive-font">GVH</h1>
+        <h1 class="responsive-font">TOURISM</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum iure
+          id dolor quod necessitatibus suscipit itaque blanditiis sequi, sit,
+          quis quos nam, quisquam exercitationem! Amet quia blanditiis illo
+          quibusdam dicta perspiciatis.
+        </p>
+      </div>
+      <div class="col-lg-6 d-flex align-items-center justify-content-lg-center">
+        <button class="btn start-trav-btn rounded-start-pill py-3 px-5 rounded-end-pill btn-primary">
+          Start Travelling
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="container-fluid black-transparent-section fixed-lg-bottom">
+    <div class="row d-flex justify-content-center mt-4 mb-3 px-3">
+      <div class="col-lg-2 me-lg-5 text-lg-center text-white d-flex flex-lg-column">
+        <p class="pe-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook"
+            viewBox="0 0 16 16">
+            <path
+              d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+          </svg>
+        </p>
+        <p class="pe-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+          </svg>
+        </p>
+        <p class="pe-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x"
+            viewBox="0 0 16 16">
+            <path
+              d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
+          </svg>
+        </p>
+      </div>
+      <div class="col-lg-2 me-lg-5 text-white d-flex flex-column">
+        <p>01</p>
+        <h6>GVSE Tourism</h6>
+        <p class="text-secondary">About GVSE Tourism</p>
+      </div>
+      <div class="col-lg-2 me-lg-5 text-white d-flex flex-column">
+        <p>02</p>
+        <h6>Our Story</h6>
+        <p class="text-secondary">About GVSE</p>
+      </div>
+      <div class="col-lg-2 me-lg-5 text-white d-flex flex-column">
+        <p>03</p>
+        <h6>Message From Our Founder</h6>
+        <p class="text-secondary">Important message from our founder</p>
+      </div>
+      <div class="col-lg-2 me-lg-5 d-flex align-items-center">
+        <img src="./assets/images/landing.jpg" alt="" style="width: 18rem" />
+      </div>
+    </div>
+  </section>
+  <section class="container-fluid px-lg-5 px-4 content">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-5 text-white">
+        <h1 class="fs-2 fw-bold">OUR STORY</h1>
+        <p class="fs-5 fw-bold roboto-400">
+          <i>
+            "Give a man a fish, to feed him for a day. Teach a man to fish,
+            and feed him for a lifetime" - lao tzu. We strongly believe in
+            bringing funds to place in need, not to be given to the people,
+            but to be used to fund actual projects that will benefit the local
+            community.</i>
+        </p>
+      </div>
+      <div class="col-lg-6 text-white">
+        <h1 class="fs-2 fw-bold">MESSAGE FROM OUR FOUNDER</h1>
+        <p class="fs-5 fw-bold roboto-400">
+          <i>My name is Linus Lin and i am from singapore. My intrepid journey
+            started in august 2013 when i first sponsored 2 teachers in
+            myanmar to provide free english education for 50 needy children in
+            a local orphanage. Venturing deeper into the rural areas of
+            myanmar has made me realize how i could contribute to those in
+            need.
+            <br />
+            In an effort to touch the lives of a greater pool of people, i
+            recruited Joseph, one of the english teachers i sponsored in 2013.
+            Together, we coined the name 'global village for hope' with the
+            mission of bringing hope to more people in the rural part of the
+            world. It is often said that the heart to serve transcends
+            borders. Joseph now runs daily operations in myanmar while i
+            operate mainly in singapore.</i>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="container-fluid black-cover-section">
+    <div class="row d-flex justify-content-start mt-5 mx-lg-5 mb-3 px-lg-5 mx-2">
+      <div class="col-lg-4 me-lg-5 text-white d-flex flex-column">
+        <h1 class="text-dark fw-bold">GVH TOURISM</h1>
+      </div>
+      <div class="col-lg-4 justify-content-start me-lg-5 text-white d-flex flex-column">
+        <input class="form-control fw-bold" id="exampleDataList" placeholder="SEARCH TOURIST SPOTS" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="d-flex justify-content-center">
+        <h1 class="text-center fw-bold my-4">
+          ENHANCE YOUR TRIP THE WAY YOU LIKE IT
+        </h1>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center mb-5">
+      <div class="col-lg-6 row">
+        <div class="col-lg-4 mb-2">
+          <a class="link-card text-dark" href="./tourism.html#adventure">
+            <h5 class="bg-dark-subtle py-3 fw-bold text-center">
+              ADVENTURE TOURISM
+            </h5>
+          </a>
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <a class="link-card text-dark" href="./tourism.html#relaxing">
+            <h5 class="bg-dark-subtle py-3 fw-bold text-center">
+              RELAXING TOURISM
+            </h5>
+          </a>
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <a class="link-card text-dark" href="./tourism.html#bussines">
+            <h5 class="bg-dark-subtle py-3 fw-bold text-center">
+              BUSSINES TOURISM
+            </h5>
+          </a>
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container-fluid bg-white" id="relaxing">
+    <div class="row d-flex justify-content-start mt-5 mx-lg-5 mb-3 px-lg-5 mx-2">
+      <div class="me-lg-5 text-dark d-flex flex-column">
+        <h1 class="text-dark text-center fw-bold fs-1">ARTICLE</h1>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center mb-5">
+      <div class="col-lg-8 row">
+        <h3 class="text-dark text-start fw-bold fs-2 mb-4">Recommendations for you</h3>
+        <div class="col-lg-4 mb-2">
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-text fw-bold">Wajib coba! 12 Kuliner nikmat khas NTT</p>
+              <p class="text-content">Wajib coba! 12 Kuliner nikmat khas NTT Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Nesciunt impedit recusandae necessitatibus.</p>
+              <button type="button" class="btn btn-primary" data-bs-target="#show-content" data-bs-toggle="modal">Learn
+                More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-text fw-bold">8 Jenis pakaian adat NTT (Nusa Tenggara Timur)</p>
+              <p class="text-content">8 Jenis pakaian adat NTT (Nusa Tenggara Timur) Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Nesciunt impedit recusandae necessitatibus.</p>
+              <button type="button" class="btn btn-primary" data-bs-target="#show-content" data-bs-toggle="modal">Learn
+                More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-2">
+          <div class="card">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="card-text fw-bold">Pengalaman pelajar NTT masuk sekolah jam 5 pagi</p>
+              <p class="text-content">Pengalaman pelajar NTT masuk sekolah jam 5 pagi Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Nesciunt impedit recusandae necessitatibus.</p>
+              <button type="button" class="btn btn-primary" data-bs-target="#show-content" data-bs-toggle="modal">Learn
+                More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="show-content" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Article</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="./assets/images/Air Terjun Wekacura SBD.jpg" style="height: 300px;" class="img-fluid card-img-top"
+              alt="..." />
+            <article>
+              <h5 class="mt-2">Wajib coba! 12 Kuliner nikmat khas NTT</h5>
+              <p class="my-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione corrupti dicta ullam
+                saepe beatae nostrum quisquam veritatis natus maiores voluptatem laudantium dolorum vitae hic, sunt
+                expedita incidunt, nulla error iste consequuntur eius at, amet nihil. A molestiae sequi quam similique
+                vel veniam debitis, laboriosam, rem quasi maiores deleniti cupiditate consectetur odio, doloremque atque
+                nostrum blanditiis quis. Id minima facilis ipsa natus in possimus ab amet sed vitae placeat sapiente
+                dignissimos accusamus cupiditate, non veritatis! Voluptates blanditiis corporis minima sunt vero nulla
+                ipsam vel neque veritatis deserunt nobis, perferendis velit dolorem, unde dolore laboriosam consequuntur
+                odio ex. Asperiores explicabo, voluptatum iure nisi, eveniet illum alias odio facere adipisci recusandae
+                iusto praesentium libero saepe nam. Sequi pariatur, id tempora quisquam enim illo suscipit culpa
+                voluptates non dolor, nesciunt quaerat unde? Harum officiis debitis reiciendis consectetur commodi odit
+                ad id, repudiandae, aut dolore facere at quam autem ducimus dolorum aliquid minima? Illum quis commodi
+                porro eveniet debitis, aliquid doloribus nesciunt! Mollitia amet, eos doloremque, maiores voluptate
+                nemo, alias corporis perferendis officiis a excepturi possimus. Officiis iure alias sit, commodi
+                quisquam ducimus qui repudiandae facilis blanditiis dolorum possimus ipsam. Commodi cupiditate quo quis,
+                unde qui at tenetur quod reprehenderit ut provident aspernatur ipsam iure.</p>
+            </article>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container-fluid black-testimonial-section py-5">
+    <h1 class="text-center text-white my-5">Testimonial</h1>
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-3 text-white">
+        <p class="fs-5 fw-bold">
+          <i>
+            "Mount Mutis boasts beautiful and refreshing scenery, believed by
+            our ancestors to be sacred due to its connection with the
+            ancestors of the Timor Atoin Pah Meto people."</i>
+        </p>
+        <p>By Alfons Tafuli</p>
+      </div>
+      <div class="col-lg-3 text-white">
+        <p class="fs-5 fw-bold">
+          <i>"Amazing Komodos, yes it's a show for tourist in that small part
+            of komodo island. But otherwise many tourist would die there ...
+            Komodos are preda ...."</i>
+        </p>
+        <p>By Killian Xa</p>
+      </div>
+      <div class="col-lg-3 text-white">
+        <p class="fs-5 fw-bold">
+          <i>"Kelimutu Lake is a volcanic lake with three craters, and
+            tipycally, at certain times, the water color of lake varies. The
+            sunrise time is ideal for photography. The track is also not too
+            challenging, making it suitable for nature tourism holidays."</i>
+        </p>
+        <p>By Usep Usman N</p>
+      </div>
+    </div>
+  </section>
+  <footer class="container-fluid py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-4 text-white">
+        <h3 class="">Social</h3>
+        <div class="row px-1">
+          <a href="" class="sosial-link">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook"
+                viewBox="0 0 16 16">
+                <path
+                  d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+              </svg>
+              GLobal Village for Hope - GVH Philanthropy
+            </i>
+          </a>
+          <a href="" class="sosial-link">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+                viewBox="0 0 16 16">
+                <path
+                  d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+              </svg>
+              globalvillageforhope
+            </i>
+          </a>
+          <a href="" class="sosial-link">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope"
+                viewBox="0 0 16 16">
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+              </svg>
+              globalvillageforhope@gmail.com
+            </i>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-white mt-lg-0 mt-5">
+        <h3 class="">Navigation</h3>
+        <div class="row">
+          <a href="./about.html" class="sosial-link"><i>About Us</i></a>
+          <a href="./faq.html" class="sosial-link"><i>FAQ</i></a>
+          <a href="./contact.html" class="sosial-link"><i>Contact Us</i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- START::ARTICLE -->
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Ambil semua elemen dengan kelas 'text-content'
+      var textContentElements = document.querySelectorAll('.text-content');
+
+      // Loop melalui setiap elemen 'text-content'
+      textContentElements.forEach(function (element) {
+        // Ambil teks lengkap dari elemen
+        var fullText = element.textContent.trim();
+
+        // Potong teks menjadi 20 kata
+        var shortenedText = fullText.split(' ').slice(0, 10).join(' ');
+
+        // Tambahkan teks lengkap ke dalam atribut data
+        element.setAttribute('data-full-text', fullText);
+
+        // Ganti teks dalam elemen dengan teks yang dipotong
+        element.textContent = shortenedText + '...';
+      });
+      // Ambil semua tombol "Learn More"
+      var learnMoreButtons = document.querySelectorAll('[data-bs-target="#show-content"]');
+
+      // Loop melalui setiap tombol "Learn More"
+      learnMoreButtons.forEach(function (button) {
+        // Tambahkan event listener untuk setiap tombol
+        button.addEventListener('click', function () {
+          // Ambil card terkait dengan tombol yang ditekan
+          var card = button.closest('.card');
+
+          // Ambil judul dan deskripsi dari card
+          var title = card.querySelector('.card-text').textContent.trim();
+          var content = card.querySelector('.text-content').getAttribute('data-full-text');
+
+          // Ubah konten modal sesuai dengan konten card yang dipilih
+          var modal = document.getElementById('show-content');
+          modal.querySelector('article h5').textContent = title;
+          modal.querySelector('.modal-body article p').innerHTML = content;
+        });
+      });
+    });
+  </script>
+  <!-- END::ARTICLE -->
+  <script>
+    window.addEventListener("scroll", function () {
+      var navbar = document.querySelector(".navbar");
+      navbar.classList.toggle("navbar-scrolled", window.scrollY > 0);
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

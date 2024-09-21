@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Memuat jQuery dari CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>CCA - GMIT YEGAR SAHADUTA OSMO 2022</title>
+    <style>
+        #demo {
+            text-align: center;
+            font-size: 60px;
+            margin-top: 0px;
+        }
+
+        .timer {
+            font-family: sans-serif;
+            display: inline-block;
+            padding: 24px 32px;
+            border-radius: 30px;
+            background: white;
+        }
+
+        .timer__part {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .timer__btn {
+            width: 50px;
+            height: 50px;
+            margin-left: 16px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            background: #8208e6;
+            cursor: pointer;
+        }
+
+        .timer__btn--start {
+            background: #00b84c;
+        }
+
+        .timer__btn--stop {
+            background: #ff0256;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-4 mb-5">
+        <div class="card text-center">
+            <div class="card-header">
+                <div class="row">
+                    <div class="">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            +TAMBAH TIM
+                        </button>
+                        <a href="./kompetisi-selesai.php" class="btn btn-success">
+                            KOMPETISI SELESAI
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <h1><strong> CCA </strong></h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="timer"></div>
+                                <p id="demo"></p>
+                                <button type="button" onclick="restart()" class="btn btn-info">
+                                    RESTART
+                                </button>
+                                <audio hidden controls id="audioplay">
+                                    <source src="./assets/musik/bell.wav" type="audio/wav">
+                                    Browsermu tidak mendukung tag audio, upgrade donk!
+                                </audio>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center" id="container">
+                            <!-- <div class="col-sm-6 p-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="card-title" id="nama-tim"><strong>Regu 1</strong></h2>
+                                        <a href="./hapus.php?id=" class="btn btn-warning"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                            </svg></a>
+                                        <hr>
+                                        <h2 class="card-text">Poin</h2>
+                                        <h1>
+                                            <strong class="card-text" id="poin">0</strong>
+                                        </h1>
+                                        <a href="./update-poin.php?mod=tambah&&poin=100&&id="
+                                            class="btn btn-primary">+100</a>
+                                        <a href="./update-poin.php?mod=kurang&&poin=100&&id="
+                                            class="btn btn-danger">-100</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form name="kmf-contact-form">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah TIM</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nama TIM</label>
+                            <input type="text" autofocus='true' name="NAMA" class="form-control" id="NAMA"
+                                placeholder="Nama Tim">
+                            <input type="hidden" autofocus='true' name="ID" class="form-control" id="ID">
+                            <input type="hidden" value="0" name="POIN" class="form-control" id="POIN">
+                            <input type="hidden" value="0" name="WIN" class="form-control" id="WIN">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+                </div>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const scriptURLGet =
+        "https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec";
+    const namaTim = document.getElementById("nama-tim");
+    const poin = document.getElementById("poin");
+    const ID = document.getElementById("ID");
+    let tampungID = 0;
+    // ===============================================
+    // ==================== Tampilkan data =================
+    // ===============================================
+
+    fetch(scriptURLGet, {
+        method: "GET", // Menggunakan metode GET untuk mengambil data
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.length != 0) {
+                // Mendapatkan header dari data pertama
+                const headers = Object.keys(data[0]);
+
+                // Looping CARD
+                data.forEach((row) => {
+                    // Ambil elemen container
+                    const container = document.getElementById('container');
+                    // Looping untuk setiap data dalam array
+                    // Buat elemen col-sm-6
+                    const col = document.createElement('div');
+                    col.className = 'col-sm-6 p-2';
+
+                    // Buat elemen card
+                    const card = document.createElement('div');
+                    card.className = 'card';
+
+                    // Buat elemen card-body
+                    const cardBody = document.createElement('div');
+                    cardBody.className = 'card-body';
+
+                    // Buat elemen h2 untuk nama tim
+                    const namaTim = document.createElement('h2');
+                    namaTim.className = 'card-title';
+                    namaTim.innerHTML = `<strong>${row.NAMA}</strong>`;
+
+                    // Buat elemen link untuk hapus
+                    const deleteLink = document.createElement('a');
+                    deleteLink.href = `./hapus.php?id=${row.ID}`;
+                    deleteLink.className = 'btn btn-warning';
+                    deleteLink.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>`;
+
+                    // Buat elemen hr
+                    const hr = document.createElement('hr');
+
+                    // Buat elemen h2 untuk poin
+                    const poin = document.createElement('h2');
+                    poin.className = 'card-text';
+                    poin.textContent = 'Poin';
+
+                    // Buat elemen strong untuk nilai poin
+                    const poinValue = document.createElement('strong');
+                    poinValue.className = 'card-text';
+                    poinValue.textContent = row.POIN;
+                    poinValue.style.fontSize = '50pt';
+
+                    // Buat elemen h2 untuk poin
+                    const br = document.createElement('br');
+
+                    // Buat elemen link untuk menambah poin
+                    const tambahPoinLink = document.createElement('a');
+                    tambahPoinLink.href = ``;
+                    tambahPoinLink.className = 'btn btn-primary';
+                    tambahPoinLink.textContent = '+100';
+
+                    // Tambahkan event listener
+                    tambahPoinLink.addEventListener('click', function (event) {
+                        event.preventDefault(); // Mencegah perilaku default dari link
+                        updatePoin('tambah',row.NAMA, 100, row.WIN, row.ID); // Memanggil fungsi untuk memperbarui poin
+                    });
+
+                    // Buat elemen link untuk mengurangi poin
+                    const kurangPoinLink = document.createElement('a');
+                    kurangPoinLink.href = ``;
+                    kurangPoinLink.className = 'btn btn-danger';
+                    kurangPoinLink.textContent = '-100';
+
+                    // Tambahkan event listener
+                    kurangPoinLink.addEventListener('click', function (event) {
+                        event.preventDefault(); // Mencegah perilaku default dari link
+                        updatePoin('kurang',row.NAMA, 100, row.WIN, row.ID); // Memanggil fungsi untuk memperbarui poin
+                    });
+
+
+                    // Menggabungkan elemen-elemen
+                    cardBody.appendChild(namaTim);
+                    cardBody.appendChild(deleteLink);
+                    cardBody.appendChild(hr);
+                    cardBody.appendChild(poin);
+                    cardBody.appendChild(poinValue);
+                    cardBody.appendChild(br);
+                    cardBody.appendChild(tambahPoinLink);
+                    cardBody.appendChild(kurangPoinLink);
+                    card.appendChild(cardBody);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                });
+
+                tampungID = data.length
+            } else {
+                msgEmptyData.classList.remove("d-none");
+            }
+            ID.value = tampungID + 1;
+        })
+        .catch((error) => console.error("Error!", error.message));
+
+
+    //================================================
+    // =============== Tambah Tim ====================
+    //================================================
+    const form = document.forms["kmf-contact-form"];
+    console.log(form);
+    form.addEventListener("submit", (e) => {
+        scriptUrlCreate = 'https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec'
+        e.preventDefault();
+
+        const namaTeamInput = form.querySelector("#NAMA"); // Mendapatkan input Nama TIM
+        const idInput = form.querySelector("#ID"); // Mendapatkan input ID
+        const namaTeamValue = namaTeamInput.value; // Mendapatkan nilai input Nama TIM
+        const idValue = idInput.value; // Mendapatkan nilai input ID
+
+        const dataToSend = {
+            mod: 'add',
+            nama: namaTeamValue,
+            poin: 0,
+            win: 0,
+            id: idValue
+        };
+
+        fetch(scriptUrlCreate, {
+            method: "POST",
+            body: JSON.stringify(dataToSend),
+            mode: "no-cors"
+        })
+            .then((response) => {
+                form.reset();
+                alert("Data berhasil ditambahkan!");
+                console.log("Success!", response);
+                window.location.href = '';
+            })
+            .catch((error) => console.error("Error!", error.message));
+    });
+
+
+
+    // const msgEmptyData = document.getElementById("empty-data");
+    // Fungsi untuk mengirim permintaan pembaruan poin ke Google Apps Script
+    function updatePoin(mod, namaTeamValue, poin, win, id) {
+        const scriptURL = "https://script.google.com/macros/s/AKfycbwxxcJt73l6cYEEzxSS3sroMqwmsTX2FXmB22y1EiydRFU1fzjEBRsmD2ilxQ6AIXN9dw/exec";
+
+        const dataToSend = {
+            mod: mod,
+            nama: namaTeamValue,
+            poin: poin,
+            win: win,
+            id: id
+        };
+
+        console.log(JSON.stringify(dataToSend))
+
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(dataToSend)
+        // };
+
+        fetch(scriptURLGet, {
+            method: 'POST',
+            body: JSON.stringify(dataToSend),
+            mode: "no-cors"
+        })
+            .then(response => {
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(json => console.log(json))
+            .catch(err => console.log(err));
+
+        // window.location.href = '';
+    }
+
+
+</script>
+<script>
+
+    class Timer {
+        constructor(root) {
+            root.innerHTML = Timer.getHTML();
+
+            this.el = {
+                minutes: root.querySelector(".timer__part--minutes"),
+                seconds: root.querySelector(".timer__part--seconds"),
+                control: root.querySelector(".timer__btn--control"),
+                reset: root.querySelector(".timer__btn--reset")
+            };
+
+            this.interval = null;
+            this.remainingSeconds = 0;
+
+            this.el.control.addEventListener("click", () => {
+                if (this.interval === null) {
+                    this.start();
+                } else {
+                    this.stop();
+                }
+            });
+
+            this.el.reset.addEventListener("click", () => {
+                const inputMinutes = 0.25;
+                // const inputMinutes = prompt("Enter number of minutes:");
+
+                if (inputMinutes < 60) {
+                    this.stop();
+                    this.remainingSeconds = inputMinutes * 60;
+                    this.updateInterfaceTime();
+                }
+            });
+        }
+
+        updateInterfaceTime() {
+            const minutes = Math.floor(this.remainingSeconds / 60);
+            const seconds = this.remainingSeconds % 60;
+
+            this.el.minutes.textContent = minutes.toString().padStart(2, "0");
+            this.el.seconds.textContent = seconds.toString().padStart(2, "0");
+        }
+
+        updateInterfaceControls() {
+            if (this.interval === null) {
+                this.el.control.innerHTML = `<span class="material-icons">play_arrow</span>`;
+                this.el.control.classList.add("timer__btn--start");
+                this.el.control.classList.remove("timer__btn--stop");
+            } else {
+                this.el.control.innerHTML = `<span class="material-icons">pause</span>`;
+                this.el.control.classList.add("timer__btn--stop");
+                this.el.control.classList.remove("timer__btn--start");
+            }
+        }
+
+        start() {
+            if (this.remainingSeconds === 0) return;
+
+            this.interval = setInterval(() => {
+                this.remainingSeconds--;
+                this.updateInterfaceTime();
+
+                if (this.remainingSeconds === 0) {
+                    document.getElementById("audioplay").autoplay = true;
+                    document.getElementById("demo").innerHTML = "<strong>WAKTU HABIS</strong>";
+                    this.stop();
+                }
+            }, 1000);
+
+            this.updateInterfaceControls();
+        }
+
+        stop() {
+            clearInterval(this.interval);
+
+            this.interval = null;
+
+            this.updateInterfaceControls();
+
+        }
+
+        static getHTML() {
+            return `
+			<span class="timer__part timer__part--minutes">00</span>
+			<span class="timer__part">:</span>
+			<span class="timer__part timer__part--seconds">00</span>
+			<button type="button" class="timer__btn timer__btn--control timer__btn--start">
+				<span class="material-icons">play_arrow</span>
+			</button>
+			<button type="button" class="timer__btn timer__btn--reset">
+				<span class="material-icons">timer</span>
+			</button>
+		`;
+        }
+    }
+
+    new Timer(
+        document.querySelector(".timer")
+    );
+
+    function restart() {
+        location.reload();
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+<!-- <script src="./assets/fontawesome/js/all.min.js"></script> -->
+
+</html>
