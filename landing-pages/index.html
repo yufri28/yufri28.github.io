@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Program Pelayanan Anak Sekolah Minggu 2026</title>
+    <title>Program Pelayanan PART J-YES Tahun 2026</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,6 +15,48 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
+
+    <style>
+        .typing-cursor {
+            display: inline-block;
+            margin-left: 4px;
+            font-weight: 300;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
 </head>
 
 <body class="bg-slate-50 text-gray-800">
@@ -22,18 +64,30 @@
     <div id="app">
 
         <!-- HERO -->
-        <section
-            class="min-h-screen flex items-center justify-center text-center px-6 bg-gradient-to-br from-indigo-600 to-blue-500 text-white">
-            <div data-aos="fade-up">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Bahan Pembahasan<br>Program Pelayanan Anak Sekolah
-                    Minggu</h1>
-                <h2 class="text-2xl font-semibold mb-2">Tahun 2026</h2>
-                <p class="italic mb-8">(Dengan Evaluasi Pelayanan Tahun 2025)</p>
-                <button @click="scrollTo('pendahuluan')"
-                    class="px-8 py-3 bg-white text-indigo-700 rounded-full font-semibold shadow hover:scale-105 transition">Mulai
-                    Membaca</button>
+        <section class="min-h-screen flex items-center justify-center text-center px-6
+           bg-gradient-to-br from-indigo-600 to-blue-500 text-white">
+
+            <div data-aos="fade-up" class="max-w-4xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight min-h-[7rem]">
+                    <div>{{ typedLine1 }}<span v-if="cursorLine === 1" class="typing-cursor">|</span></div>
+                    <div>{{ typedLine2 }}<span v-if="cursorLine === 2" class="typing-cursor">|</span></div>
+                </h1>
+
+                <h2 v-if="showSubtitle" class="text-2xl font-semibold mb-2 animate-fade-in">
+                    Tahun 2026
+                </h2>
+
+                <p v-if="showSubtitle" class="italic mb-8 animate-fade-in delay-200">
+                    (Dengan Evaluasi Pelayanan Tahun 2025)
+                </p>
+
+                <button v-if="showButton" @click="scrollTo('pendahuluan')" class="px-8 py-3 bg-white text-indigo-700 rounded-full
+                   font-semibold shadow hover:scale-105 transition">
+                    Mulai Membaca
+                </button>
             </div>
         </section>
+
 
         <!-- PENDAHULUAN -->
         <section id="pendahuluan" class="py-20 px-6 bg-white">
@@ -44,7 +98,7 @@
                     Kristiani, membangun karakter, serta menumbuhkan iman anak sesuai dengan tahap perkembangan mereka.
                 </p>
                 <p class="leading-relaxed">Dokumen ini disusun sebagai bahan pembahasan dan perencanaan Program
-                    Pelayanan Anak Sekolah Minggu Tahun 2026, yang diawali dengan evaluasi pelaksanaan pelayanan Tahun
+                    Pelayanan PART J-YES Tahun 2026, yang diawali dengan evaluasi pelaksanaan pelayanan Tahun
                     2025 sebagai dasar perbaikan dan pengembangan pelayanan ke depan.</p>
             </div>
         </section>
@@ -53,7 +107,7 @@
         <section class="py-20 px-6 bg-indigo-50">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-3xl font-bold text-indigo-700 mb-10 text-center" data-aos="fade-up">II. Evaluasi
-                    Pelayanan Anak Sekolah Minggu Tahun 2025</h2>
+                    Pelayanan PART J-YES Tahun 2025</h2>
 
                 <!-- A. Tujuan Evaluasi -->
                 <div class="mb-12" data-aos="fade-up">
@@ -72,7 +126,7 @@
                         <div class="bg-white p-6 rounded-xl shadow">
                             <h4 class="font-semibold text-indigo-600 mb-2">Jumlah Anak</h4>
                             <p>Rata-rata kehadiran: <strong>22 anak setiap minggu</strong></p><br>
-                            <p>Perbandingan awal & akhir tahun: Jumlah Anak Sekolah Minggu mengalami penurunan, dari
+                            <p>Perbandingan awal & akhir tahun: Jumlah PART J-YES Tahun mengalami penurunan, dari
                                 <strong>131 anak pada 9 Februari 2025</strong> menjadi <strong>77 anak pada 16 November
                                     2025.</strong>
                             </p>
@@ -96,7 +150,7 @@
                         <div class="bg-white p-6 rounded-xl shadow">
                             <h4 class="font-semibold text-indigo-600 mb-2">Guru & Pelayan</h4>
                             <p>Guru aktif: 18 orang</p>
-                            <p>Guru aktif (tugas luar kota): 3 orang (Rudi, Peson dan Brenda)</p>
+                            <p>Guru aktif (tugas luar kota): 3 orang (Rudi, Pesona dan Brenda)</p>
                             <p>Guru tidak aktif: 2 orang (Novy dan Welly)</p>
                             <p>Guru yang keluar: 2 orang (Endro dan Juliet)</p>
                         </div>
@@ -106,7 +160,7 @@
                 <!-- C. Evaluasi Program -->
                 <div class="mb-12 overflow-x-auto" data-aos="fade-up">
                     <h3 class="text-xl font-semibold mb-4">C. Evaluasi Program dan Kegiatan Tahun 2025</h3>
-                    <table class="min-w-full bg-white rounded-xl shadow text-sm">
+                    <table class="min-w-fulltable-auto  bg-white rounded-xl shadow text-sm">
                         <thead class="bg-indigo-600 text-white">
                             <tr>
                                 <th class="p-3">No</th>
@@ -135,7 +189,13 @@
                                 <td class="p-2">Feb - Nov 2025 (43 Minggu)</td>
                                 <td class="p-2">0</td>
                                 <td class="p-2">150 anak PART (dari 5 Pos)</td>
-                                <td class="p-2">93,02% (40 kali)</td>
+                                <td class="p-2">
+                                    93,02% (40 kali)
+                                    <button @click="openAlasan"
+                                        class="ml-2 text-indigo-600 underline hover:text-indigo-800 text-sm">
+                                        Baca Alasan
+                                    </button>
+                                </td>
                             </tr>
                             <tr class="border-b">
                                 <td class="p-2 text-center">3</td>
@@ -226,7 +286,7 @@
                                 <td class="p-2">Anak-anak PART dari 5 Pos</td>
                                 <td class="p-2">Mar - Nov 2025</td>
                                 <td class="p-2">1.000.000</td>
-                                <td class="p-2">7 item ATK/td>
+                                <td class="p-2">7 item ATK</td>
                                 <td class="p-2">100%</td>
                             </tr>
                             <tr>
@@ -250,6 +310,7 @@
                             <li>Kesesuaian materi dengan tema Pelayanan GMIT </li>
                             <li>Metode pengajaran (cerita, permainan, media visual dll)</li>
                             <li>Keterlibatan dan antusiasme anak (sangat baik, baik, cukup baik atau tidak baik)</li>
+                            <li>Tambahan dari forum (Kritik, Saran dll)</li>
                         </ul>
                     </div>
                     <div>
@@ -272,83 +333,133 @@
                                 </ol>
                             </li>
                             <li>
-                                Kebutuhan guru di setiap Lingkungan/Pos (perlu ditambah dll) (Lingkungan 1, 4 minggu
+                                Kebutuhan guru di setiap Lingkungan/Pos diperhatikan kembali (Lingkungan 1, 4 minggu
                                 cuma 1 orang pengajar, yaitu 2025-06-08, 2025-07-13, 2025-09-28, 2025-11-16)
                             </li>
                             <li>Ruang kelas, alat dan bahan ajar</li>
-                            <li>Dll</li>
+                            <li>Tambahan dari forum (Kritik, Saran dll)</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- F & G -->
                 <div data-aos="fade-up">
-                    <h3 class="text-xl font-semibold mb-3">F. Permasalahan dan Tantangan</h3>
+                    <h3 class="text-xl font-semibold mb-3">F. Keberhasilan, Permasalahan dan Tantangan</h3>
+                    <p><strong>Keberhasilan:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2 mb-6">
+                        <li>Semua program dapat berjalan dengan baik</li>
+                        <li>Pembelajaran kreatif setiap minggu</li>
+                        <li>Natal PART dengan petugas anak-anak berhasil dilaksanakan dengan luar biasa</li>
+                        <li>
+                            Tren Kehadiran Endria Laki-laki di setiap Pos Naik dari Feb-Nov 2025
+                            <a class="text-blue-600" href="#grafik">
+                                <i>(Lihat poin G. Grafik Kehadiran)</i>
+                            </a>
+                        </li>
+                    </ul>
+                    <p><strong>Permasalah dan Tantangan:</strong></p>
                     <ul class="list-disc pl-6 space-y-2 mb-6">
                         <li>
-                            Tren Kehadiran TR, baik Laki2 maupun perempuan di setiap Pos pada (Feb - Nov 2025) cenderung
-                            turun
+                            Tren Kehadiran Tanggung dan Remaja, baik laki-laki maupun perempuan di setiap Pos pada
+                            (Feb-Nov 2025) cenderung menurun.
+                            <a class="text-blue-600" href="#grafik">
+                                <i>(Lihat poin G. Grafik Kehadiran)</i>
+                            </a><br>
+                            <strong>Identifikasi: </strong>
+                            <p>
+                                1. Ada anak Tanggung & Remaja yang masuk kelas Teruna
+                            </p>
+                            <p>
+                                2. Anak yang belum masuk Teruna terpengaruh dengan teman-temannya yang masuk kelas
+                                Teruna
+                            </p>
+                            <p>
+                                3. Ada anak yang merasa tidak cocok sekolah minggu lagi karena mempermasalahkan fisik
+                            </p>
+                            <p>4. Identifikasi tambahan dari forum</p>
+                            <strong>Solusi: </strong>
+                            <p>1. Masukkan dari forum</p>
                         </li>
                         <li>
                             Rata-rata Kehadiran Anak di Pos 3 sekitar 36 anak setiap minggu. Dengan jumlah tertinggi 65
                             anak dan terendah 18 anak. Kemudian komposisi rata-rata kehadiran setiap minggu yaitu,
-                            Endria 19 anak dan TR 18 anak.
+                            Endria 19 anak dan Tanggung dan Remaja 18 anak.
+                            <a class="text-blue-600" href="#grafik">
+                                <i>(Lihat poin G. Grafik Kehadiran)</i>
+                            </a><br>
+                            <strong>Identifikasi: </strong>
+                            <p>
+                                1. Yang mengikuti sekolah minggu dari berbagai agama
+                            </p>
+                            <p>2. Identifikasi tambahan dari forum</p>
+                            <strong>Solusi: </strong>
+                            <p>1. Apakah perlu penambahan guru?</p>
+                            <p>2. Masukkan dari forum</p>
                         </li>
                         <li>
                             Tren kehadiran anak-anak setiap bulan (Feb-Nov) pada tahun 2025 cenderung turun dengan
                             jumlah tertinggi pada 147 anak dan terendah 62 anak. Jika dibandingkan dengan tahun 2024,
                             tahun 2024 lebih baik karena cenderung naik dengan jumlah tertinggi 160 anak dan terendah 87
                             anak.
+                            <a class="text-blue-600" href="#grafik">
+                                <i>(Lihat poin G. Grafik Kehadiran)</i>
+                            </a><br>
+                            <strong>Identifikasi: </strong>
+                            <p>
+                                1. Sama dengan poin permasalahan pertama
+                            </p>
+                            <p>2. Identifikasi tambahan dari forum</p>
+                            <strong>Solusi: </strong>
+                            <p>1. Meningkatkan kesadaran dan pemahaman tentang pentingnya sekolah minggu</p>
+                            <p>2. Masukkan dari forum</p>
                         </li>
                         <li>
-                            Pola kehadiran anak-anak sepanjang Feb - Nov 2025 terendah pada awal sekolah minggu, libur
-                            semester (Juni - Juli)
+                            Pola kehadiran anak-anak sepanjang Feb-Nov 2025 terendah pada awal sekolah minggu dan libur
+                            semester (Juni-Juli).
+                            <a class="text-blue-600" href="#grafik">
+                                <i>(Lihat poin G. Grafik Kehadiran)</i>
+                            </a><br>
+                            <strong>Identifikasi: </strong>
+                            <p>
+                                1. Informasi belum tersampaikan secara menyeluruh kepada anak-anak (Awal Skolming)
+                            </p>
+                            <p>
+                                2. Anak-anak pulang kampung pada saat liburan semester
+                            </p>
+                            <p>3. Identifikasi tambahan dari forum</p>
+                            <strong>Solusi: </strong>
+                            <p>1. Menginformasikan jadwal sekolah minggu sebelum dimulai</p>
+                            <p>2. Masukkan dari forum</p>
                         </li>
-                        <li>
-                            Tambahan: Tren Kehadiran Endria Laki-laki di setiap Pos Naik dari Feb - Nov 2025
-                        </li>
-                        <li>Dll</li>
+                        <li>Tambahan dari forum(Kritik, Saran dll)</li>
                     </ul>
-                    <h3 class="text-xl font-semibold mb-4">G. Grafik Kehadiran</h3>
+                    <!-- <h3 class="text-xl font-semibold mb-4">G. Grafik Kehadiran</h3> -->
 
-                    <section class="py-20 px-6 bg-indigo-50">
+                    <section class="py-20 px-6 bg-indigo-50" id="grafik">
                         <div class="max-w-6xl mx-auto">
-                            <h3 class="text-2xl font-semibold mb-6 text-center">G. Grafik Kehadiran</h3>
-
-                            <!-- GRID -->
+                            <h3 class="text-2xl font-semibold mb-6 text-center">
+                                G. Grafik Kehadiran
+                            </h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div v-for="(img, index) in images" :key="index"
                                     class="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition group">
-                                    <div class="relative cursor-pointer" @click="openImage(img)">
-                                        <img :src="img" :alt="'Grafik Kehadiran ' + (index + 1)" class="w-full h-auto rounded-lg transition
-                                    transform group-hover:scale-105" />
-
-                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30
-                                    flex items-center justify-center rounded-lg transition">
-                                            <span class="text-white opacity-0 group-hover:opacity-100">
+                                    <a :href="img" data-lightbox="grafik-kehadiran"
+                                        :data-title="'Grafik Kehadiran ' + (index + 1)"
+                                        class="relative block cursor-pointer">
+                                        <img :src="img" :alt="'Grafik Kehadiran ' + (index + 1)"
+                                            class="w-full h-auto rounded-lg transition transform group-hover:scale-105" />
+                                        <div
+                                            class="absolute inset-0 bg-black/0 group-hover:bg-black/30 flex items-center justify-center rounded-lg transition">
+                                            <span class="text-white text-sm opacity-0 group-hover:opacity-100">
                                                 🔍 Klik untuk memperbesar
                                             </span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- MODAL -->
-                            <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center
-                        bg-black/80 backdrop-blur-sm" @click.self="closeImage">
-
-                                <div class="relative max-w-6xl w-full px-4">
-                                    <button @click="closeImage" class="absolute -top-10 right-0 text-white text-3xl
-                               hover:text-red-400 transition">
-                                        ✕
-                                    </button>
-
-                                    <img :src="activeImage" class="w-full max-h-[90vh] object-contain
-                                rounded-xl shadow-2xl" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </section>
+
 
                     <br>
                     <h3 class="text-xl font-semibold mb-3">H. Kesimpulan Evaluasi Tahun 2025</h3>
@@ -363,7 +474,7 @@
             <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
                 <h2 class="text-3xl font-bold text-indigo-700 mb-6">III. Tema Pelayanan Tahun 2026</h2>
                 <p class="text-xl font-semibold mb-4">“Mengembangkan Talenta Anak dalam Iman untuk Melayani Tuhan”</p>
-                <p>Tema ini mengarahkan pelayanan Anak Sekolah Minggu pada pembinaan iman yang berjalan seiring dengan
+                <p>Tema ini mengarahkan pelayanan anak-anak pada pembinaan iman yang berjalan seiring dengan
                     pengembangan bakat dan potensi anak.</p>
             </div>
         </section>
@@ -372,7 +483,7 @@
         <section class="py-20 px-6 bg-indigo-50">
             <div class="max-w-5xl mx-auto" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-indigo-700 mb-6">IV. Tujuan Pelayanan Tahun 2026</h2>
-                <p class="mb-4"><strong>Tujuan Umum:</strong> Membina anak Sekolah Minggu agar bertumbuh dalam iman
+                <p class="mb-4"><strong>Tujuan Umum:</strong> Membina anak-anak agar bertumbuh dalam iman
                     Kristen dan mengembangkan talenta sebagai sarana pelayanan.</p>
                 <ul class="list-decimal pl-6 space-y-2">
                     <li>Mengenal minat dan bakat sejak dini</li>
@@ -393,7 +504,9 @@
 
                 <div class="grid md:grid-cols-4 gap-6 justify-center">
                     <div class="bg-indigo-50 p-6 rounded-xl shadow md:col-span-2 text-center">
-                        Program Rutin
+                        Program Rutin (Ibadah Sekolah Minggu Gabungan, Ibadah Sekolah Minggu, Kegiatan Paskah, Ibadah
+                        Padang HUT anak GMIT, Natal PART, Pengadaan Bahan Ajar, Penambahan Pengajar PART
+                        (Jika diperlukan)).
                     </div>
 
                     <div class="bg-indigo-50 p-6 rounded-xl shadow md:col-span-2 text-center">
@@ -402,22 +515,66 @@
                 </div>
             </div>
         </section>
-
+        <!-- Indikator Keberhasilan -->
+        <section class="py-20 px-6 bg-indigo-50">
+            <div class="max-w-5xl mx-auto" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-indigo-700 mb-6">VI. Indikator Keberhasilan</h2>
+                <p class="mb-4">Pelayanan berhasil ketika:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Anak aktif dan berani mengekspresikan diri.</li>
+                    <li>Terlihat perkembangan talenta dan karakter.</li>
+                    <li>Anak terlibat dalam pelayanan gereja.</li>
+                    <li>Dukungan positif dari orang tua.</li>
+                </ul>
+            </div>
+        </section>
 
         <!-- PENUTUP -->
         <section class="py-20 px-6 bg-indigo-700 text-white text-center">
             <div class="max-w-4xl mx-auto" data-aos="fade-up">
-                <h2 class="text-3xl font-bold mb-4">IX. Penutup</h2>
-                <p>Pelayanan Anak Sekolah Minggu Tahun 2026 diharapkan menjadi wadah pembinaan iman yang menyenangkan,
+                <h2 class="text-3xl font-bold mb-4">VII. Penutup</h2>
+                <p>Pelayanan anak-anak tahun 2026 diharapkan menjadi wadah pembinaan iman yang menyenangkan,
                     membangun, dan relevan melalui pengembangan talenta anak.</p>
             </div>
         </section>
 
-        <footer class="py-6 text-center text-sm bg-indigo-900 text-indigo-200">© 2026 Pelayanan Anak Sekolah Minggu
+        <footer class="py-6 text-center text-sm bg-indigo-900 text-indigo-200">© 2026 Pelayanan PART J-YES Tahun
         </footer>
 
+        <!-- MODAL ALASAN -->
+        <div v-if="showAlasan" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            @click.self="closeAlasan">
+
+            <div class="bg-white max-w-xl w-full rounded-xl shadow-lg p-6 relative">
+
+                <button @click="closeAlasan" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-xl">
+                    ✕
+                </button>
+
+                <h4 class="text-lg font-semibold text-indigo-700 mb-4">
+                    Alasan Realisasi 93,02%
+                </h4>
+
+                <p class="text-gray-700 leading-relaxed">
+                    Sekolah Minggu dimulai pada tanggal <b>09 Februari 2025</b> dan
+                    berakhir pada <b>16 November 2025</b> untuk persiapan
+                    <b>HUT Anak GMIT</b> yang dilaksanakan pada hari Minggu serta
+                    persiapan <b>Petugas Natal PART</b> oleh anak-anak.
+                </p>
+            </div>
+        </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
+    <script>
+        lightbox.option({
+            resizeDuration: 200,
+            wrapAround: true,
+            disableScrolling: true,
+        })
+    </script>
     <script>
         const { createApp } = Vue
 
@@ -447,32 +604,68 @@
                         './grafik/12.png',
                         './grafik/13.png'
                     ],
-                    showModal: false,
-                    activeImage: ''
+                    showAlasan: false,
+                    line1: "Bahan Pembahasan",
+                    line2: "Program Pelayanan PART J-YES",
+
+                    typedLine1: "",
+                    typedLine2: "",
+
+                    index1: 0,
+                    index2: 0,
+
+                    cursorLine: 1,
+
+                    showSubtitle: false,
+                    showButton: false
                 }
             },
             methods: {
+                typeLine1() {
+                    if (this.index1 < this.line1.length) {
+                        this.typedLine1 += this.line1[this.index1]
+                        this.index1++
+                        setTimeout(this.typeLine1, 70)
+                    } else {
+                        this.cursorLine = 2
+                        setTimeout(this.typeLine2, 500)
+                    }
+                },
+                typeLine2() {
+                    if (this.index2 < this.line2.length) {
+                        this.typedLine2 += this.line2[this.index2]
+                        this.index2++
+                        setTimeout(this.typeLine2, 70)
+                    } else {
+                        setTimeout(() => {
+                            this.showSubtitle = true
+                        }, 400)
+
+                        setTimeout(() => {
+                            this.showButton = true
+                        }, 800)
+                    }
+                },
                 scrollTo(id) {
                     document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
                 },
-                openImage(img) {
-                    this.activeImage = img
-                    this.showModal = true
+                openAlasan() {
+                    this.showAlasan = true
                 },
-                closeImage() {
-                    this.showModal = false
-                    this.activeImage = ''
+                closeAlasan() {
+                    this.showAlasan = false
                 }
             },
             mounted() {
-                AOS.init({ duration: 900, once: true })
-                window.addEventListener('keydown', e => {
-                    if (e.key === 'Escape') this.closeImage()
+                this.typeLine1()
+
+                AOS.init({
+                    duration: 900,
+                    once: true
                 })
             }
         }).mount('#app')
     </script>
-
 
 </body>
 
