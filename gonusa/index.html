@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Go Nusa Institute</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#052C70",
+                        accent: "#BB811F",
+                        soft: "#F5F7FB"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* glass effect */
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .glass {
+            background: rgba(17, 24, 39, 0.6);
+        }
+    </style>
+
+</head>
+
+<body class="bg-soft dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- ================= NAVBAR ================= -->
+    <header class="fixed w-full z-50">
+        <div class="glass shadow">
+
+            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+                <!-- LOGO -->
+                <div class="flex items-center gap-3">
+                    <img src="./gonusa.ico" class="w-8 h-8">
+                    <h1 class="font-bold text-primary dark:text-white text-xl">
+                        Go Nusa Institute
+                    </h1>
+                </div>
+
+                <!-- DESKTOP MENU -->
+                <nav class="hidden md:flex gap-8 items-center font-medium">
+                    <a href="#program" class="hover:text-accent">Program</a>
+                    <a href="#keunggulan" class="hover:text-accent">Keunggulan</a>
+                    <a href="#faq" class="hover:text-accent">FAQ</a>
+
+                    <!-- THEME BUTTON -->
+                    <button id="themeToggle" class="w-10 h-10 flex items-center justify-center rounded-lg border">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+
+                    <button class="bg-accent text-white px-5 py-2 rounded-lg shadow hover:scale-105 transition">
+                        Daftar
+                    </button>
+                </nav>
+
+                <!-- MOBILE BUTTON -->
+                <button id="menuBtn" class="md:hidden text-3xl">
+                    ☰
+                </button>
+
+            </div>
+
+            <!-- MOBILE MENU PANEL -->
+            <div id="mobileMenu" class="md:hidden hidden border-t dark:border-gray-700">
+
+                <div class="px-6 py-6 space-y-5 bg-white dark:bg-gray-900">
+
+                    <!-- HEADER MOBILE -->
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-lg">Menu</span>
+
+                        <div class="flex items-center gap-3">
+                            <!-- THEME TOGGLE MOBILE -->
+                            <button id="themeToggleMobile"
+                                class="w-10 h-10 flex items-center justify-center rounded-lg border">
+                                <span id="themeIconMobile">🌙</span>
+                            </button>
+
+                            <button id="closeMenu" class="text-xl">✕</button>
+                        </div>
+                    </div>
+
+                    <a href="#program" class="block py-3 border-b">Program</a>
+                    <a href="#keunggulan" class="block py-3 border-b">Keunggulan</a>
+                    <a href="#faq" class="block py-3 border-b">FAQ</a>
+
+                    <button class="w-full mt-4 bg-accent text-white py-3 rounded-lg">
+                        Daftar Sekarang
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+    <section class="pt-32 pb-24 text-white" style="background:linear-gradient(135deg,#052C70,#1E63D6);">
+
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+            <div>
+                <h2 class="text-4xl md:text-6xl font-bold leading-tight">
+                    Belajar Cerdas,
+                    <br> Masa Depan Tuntas 🚀
+                </h2>
+
+                <div class="mt-6 text-lg opacity-90">
+                    <p class="mb-3">
+                        Platform Bimbel SKD, Psikologi & Jasmani Paket Lengkap!
+                    </p>
+
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>GO KEDINASAN / TNI / POLRI</li>
+                        <li>GO CPNS</li>
+                        <li>GO BEASISWA</li>
+                        <li>GO ENGLISH</li>
+                    </ul>
+                </div>
+
+                <div class="mt-8 flex gap-4">
+                    <button class="bg-accent px-7 py-3 rounded-xl font-semibold shadow-xl hover:scale-105 transition">
+                        Mulai Belajar
+                    </button>
+
+                    <button
+                        class="border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                        Lihat Program
+                    </button>
+                </div>
+
+                <!-- stats -->
+                <div class="mt-10 grid grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">10K+</h3>
+                        <p class="text-sm opacity-80">Siswa</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold">95%</h3>
+                        <p class="text-sm opacity-80">Kelulusan</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold">50+</h3>
+                        <p class="text-sm opacity-80">Mentor</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644" class="rounded-2xl shadow-2xl" />
+
+        </div>
+    </section>
+
+
+    <!-- ================= PROGRAM ================= -->
+    <section id="program" class="py-24 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+
+            <h2 class="text-3xl font-bold mb-14">Program Unggulan</h2>
+
+            <div class="grid md:grid-cols-3 gap-10">
+
+                <div class="p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                    <h3 class="font-bold text-xl mb-3">CPNS Intensive</h3>
+                    <p>Latihan CAT + pembahasan AI & analisis nilai.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                    <h3 class="font-bold text-xl mb-3">Tryout Nasional</h3>
+                    <p>Simulasi ujian realtime seperti aslinya.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                    <h3 class="font-bold text-xl mb-3">Digital Skill</h3>
+                    <p>Belajar coding & teknologi industri.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= KEUNGGULAN ================= -->
+    <section id="keunggulan" class="py-24 bg-soft dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
+
+            <div>
+                <h3 class="font-bold text-lg text-primary dark:text-accent">
+                    Mentor Profesional
+                </h3>
+                <p class="mt-2">Dibimbing praktisi berpengalaman.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg text-primary dark:text-accent">
+                    Belajar Fleksibel
+                </h3>
+                <p class="mt-2">Akses kapan saja dimana saja.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg text-primary dark:text-accent">
+                    Smart Analytics
+                </h3>
+                <p class="mt-2">Pantau perkembangan belajar realtime.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= TESTIMONI ================= -->
+    <section class="py-24 bg-white dark:bg-gray-800 text-center">
+        <h2 class="text-3xl font-bold mb-10">Testimoni</h2>
+
+        <div class="max-w-3xl mx-auto p-10 rounded-2xl shadow-xl bg-soft dark:bg-gray-900">
+            <p class="italic text-lg">
+                "Saya lulus CPNS setelah belajar di Go Nusa Institute!"
+            </p>
+            <h4 class="mt-4 font-semibold text-accent">
+                — Andi, Kupang
+            </h4>
+        </div>
+    </section>
+
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="py-24 bg-soft dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <h2 class="text-3xl font-bold text-center mb-10">FAQ</h2>
+
+            <details class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow mb-4">
+                <summary class="font-semibold cursor-pointer">
+                    Apakah bisa lewat HP?
+                </summary>
+                <p class="mt-2">Ya, fully mobile responsive.</p>
+            </details>
+
+            <details class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow">
+                <summary class="font-semibold cursor-pointer">
+                    Apakah ada sertifikat?
+                </summary>
+                <p class="mt-2">Ya, tersedia sertifikat digital.</p>
+            </details>
+
+        </div>
+    </section>
+
+    <!-- ================= FOOTER PREMIUM ================= -->
+    <footer class="bg-primary text-white pt-16 pb-8">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- GRID FOOTER -->
+            <div class="grid md:grid-cols-4 gap-10">
+
+                <!-- BRAND -->
+                <div>
+                    <div class="flex items-center gap-3">
+                        <img src="gonusa.ico" class="w-9 h-9">
+                        <h3 class="font-bold text-xl">Go Nusa Institute</h3>
+                    </div>
+
+                    <p class="mt-4 text-sm opacity-80 leading-relaxed">
+                        Platform belajar modern untuk persiapan CPNS,
+                        Tryout Online, dan pengembangan skill digital
+                        generasi masa depan Indonesia.
+                    </p>
+
+                    <!-- SOCIAL MEDIA -->
+                    <div class="flex gap-4 mt-6 text-xl">
+
+                        <a href="https://www.facebook.com/p/GoNusa-Institute-61586902238433/"
+                            class="hover:text-accent transition">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/go.nusa.institute_/" class="hover:text-accent transition">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor" fill-rule="evenodd"
+                                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- MENU -->
+                <div>
+                    <h4 class="font-semibold mb-4">Menu</h4>
+                    <ul class="space-y-2 text-sm opacity-90">
+                        <li><a href="#" class="hover:text-accent">Beranda</a></li>
+                        <li><a href="#program" class="hover:text-accent">Program</a></li>
+                        <li><a href="#keunggulan" class="hover:text-accent">Keunggulan</a></li>
+                        <li><a href="#faq" class="hover:text-accent">FAQ</a></li>
+                    </ul>
+                </div>
+
+
+                <!-- PROGRAM -->
+                <div>
+                    <h4 class="font-semibold mb-4">Program</h4>
+                    <ul class="space-y-2 text-sm opacity-90">
+                        <li><a href="#" class="hover:text-accent">Persiapan CPNS</a></li>
+                        <li><a href="#" class="hover:text-accent">Tryout Online</a></li>
+                        <li><a href="#" class="hover:text-accent">Digital Skill</a></li>
+                        <li><a href="#" class="hover:text-accent">Kelas Premium</a></li>
+                    </ul>
+                </div>
+
+
+                <!-- KONTAK -->
+                <div>
+                    <h4 class="font-semibold mb-4">Kontak</h4>
+
+                    <ul class="space-y-3 text-sm opacity-90">
+                        <li>📍 Kota Kupang, Nusa Tenggara Timur</li>
+                        <li>📞 +62 8xxx xxxx xxxx</li>
+                        <li>✉️ info@gonusainstitute.id</li>
+                        <li>🕒 Senin - Sabtu (11.00 - 22.00)</li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <!-- LINE -->
+            <div class="border-t border-white/20 mt-12 pt-6 text-center text-sm opacity-80">
+                © 2026 Go Nusa Institute — All Rights Reserved
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+        // ================= MOBILE MENU =================
+        const menuBtn = document.getElementById("menuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const closeMenu = document.getElementById("closeMenu");
+
+        menuBtn.onclick = () => mobileMenu.classList.remove("hidden");
+        closeMenu.onclick = () => mobileMenu.classList.add("hidden");
+
+
+        // ================= DARK MODE GLOBAL =================
+        const toggleDesktop = document.getElementById("themeToggle");
+        const toggleMobile = document.getElementById("themeToggleMobile");
+
+        const iconDesktop = document.getElementById("themeIcon");
+        const iconMobile = document.getElementById("themeIconMobile");
+
+        function updateIcons(isDark) {
+            iconDesktop.textContent = isDark ? "☀️" : "🌙";
+            iconMobile.textContent = isDark ? "☀️" : "🌙";
+        }
+
+        function setTheme(mode) {
+            if (mode === "dark") {
+                document.documentElement.classList.add("dark");
+                localStorage.theme = "dark";
+                updateIcons(true);
+            } else {
+                document.documentElement.classList.remove("dark");
+                localStorage.theme = "light";
+                updateIcons(false);
+            }
+        }
+
+        // toggle desktop
+        toggleDesktop.onclick = () => {
+            const dark = document.documentElement.classList.contains("dark");
+            setTheme(dark ? "light" : "dark");
+        };
+
+        // toggle mobile
+        toggleMobile.onclick = () => {
+            const dark = document.documentElement.classList.contains("dark");
+            setTheme(dark ? "light" : "dark");
+        };
+
+        // load saved theme
+        setTheme(localStorage.theme === "dark" ? "dark" : "light");
+    </script>
+</body>
+
+</html>
