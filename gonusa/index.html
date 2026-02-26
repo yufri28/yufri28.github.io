@@ -55,7 +55,8 @@
 
                 <!-- DESKTOP MENU -->
                 <nav class="hidden md:flex gap-8 items-center font-medium">
-                    <a href="#program" class="hover:text-accent">Program</a>
+                    <a href="#" class="hover:text-accent">Beranda</a>
+                    <a href="#product" class="hover:text-accent">Produk</a>
                     <a href="#keunggulan" class="hover:text-accent">Keunggulan</a>
                     <a href="#faq" class="hover:text-accent">FAQ</a>
 
@@ -64,9 +65,10 @@
                         <span id="themeIcon">🌙</span>
                     </button>
 
-                    <button class="bg-accent text-white px-5 py-2 rounded-lg shadow hover:scale-105 transition">
+                    <a href="./auth.html"
+                        class="bg-accent text-white px-5 py-2 rounded-lg shadow hover:scale-105 transition">
                         Daftar
-                    </button>
+                    </a>
                 </nav>
 
                 <!-- MOBILE BUTTON -->
@@ -96,11 +98,12 @@
                         </div>
                     </div>
 
-                    <a href="#program" class="block py-3 border-b">Program</a>
+                    <a href="#" class="block py-3 border-b">Beranda</a>
+                    <a href="#product" class="block py-3 border-b">Produk</a>
                     <a href="#keunggulan" class="block py-3 border-b">Keunggulan</a>
                     <a href="#faq" class="block py-3 border-b">FAQ</a>
 
-                    <button class="w-full mt-4 bg-accent text-white py-3 rounded-lg">
+                    <button onclick="sing()" class="w-full mt-4 bg-accent text-white py-3 rounded-lg">
                         Daftar Sekarang
                     </button>
 
@@ -136,11 +139,12 @@
                 </div>
 
                 <div class="mt-8 flex gap-4">
-                    <button class="bg-accent px-7 py-3 rounded-xl font-semibold shadow-xl hover:scale-105 transition">
-                        Mulai Belajar
-                    </button>
+                    <a href="./auth.html"
+                        class="bg-accent px-7 py-3 rounded-xl font-semibold shadow-xl hover:scale-105 transition">
+                        Daftar Sekarang
+                    </a>
 
-                    <a href="#program"
+                    <a href="#product"
                         class="border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
                         Lihat Program
                     </a>
@@ -170,148 +174,223 @@
     </section>
 
 
-    <!-- ================= PROGRAM ================= -->
-    <section id="program" class="py-24 bg-white dark:bg-gray-800">
+    <!-- ================= PRODUK ================= -->
+    <section id="product" class="py-24 bg-white dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-6 text-center">
 
-            <h2 class="text-3xl font-bold mb-4">Program</h2>
+            <h2 class="text-3xl font-bold mb-6">Produk</h2>
 
-            <p class="mb-12 opacity-80">
-                Platform Bimbel SKD, Psikologi & Jasmani Paket Lengkap! <br>
-                GO KEDINASAN / TNI / POLRI • GO CPNS • GO BEASISWA • GO ENGLISH
-            </p>
-
-            <!-- GRID PROGRAM -->
-            <div id="programContainer" class="grid md:grid-cols-3 gap-10">
-
-                <!-- PROGRAM 1 -->
-                <div
-                    class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
-                    <div>
-                        <h3 class="font-bold text-xl mb-3">GO CPNS</h3>
-                        <p class="opacity-80">
-                            Latihan CAT + pembahasan AI & analisis nilai.
-                        </p>
-                    </div>
-
-                    <div class="mt-6 space-y-3">
-                        <button
-                            class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                            Daftar Sekarang
-                        </button>
-
-                        <a href="#"
-                            class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
-                            Selengkapnya
-                        </a>
-                    </div>
+            <!-- SWITCH -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-gray-100 dark:bg-gray-900 p-1 rounded-xl flex gap-2">
+                    <button id="btnProgram" class="px-6 py-2 rounded-lg bg-accent text-white font-semibold transition">
+                        Program
+                    </button>
+                    <button id="btnPaket" class="px-6 py-2 rounded-lg font-semibold transition">
+                        Paket
+                    </button>
                 </div>
-
-                <!-- PROGRAM 2 -->
-                <div
-                    class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
-                    <div>
-                        <h3 class="font-bold text-xl mb-3">GO KEDINASAN</h3>
-                        <p class="opacity-80">
-                            Persiapan sekolah kedinasan & tes akademik lengkap.
-                        </p>
-                    </div>
-
-                    <div class="mt-6 space-y-3">
-                        <button
-                            class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                            Daftar Sekarang
-                        </button>
-
-                        <a href="#"
-                            class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
-                            Selengkapnya
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PROGRAM 3 -->
-                <div
-                    class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
-                    <div>
-                        <h3 class="font-bold text-xl mb-3">GO TNI / POLRI</h3>
-                        <p class="opacity-80">
-                            Latihan psikologi, akademik & kesiapan jasmani.
-                        </p>
-                    </div>
-
-                    <div class="mt-6 space-y-3">
-                        <button
-                            class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                            Daftar Sekarang
-                        </button>
-
-                        <a href="#"
-                            class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
-                            Selengkapnya
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PROGRAM 4 (Hidden awal) -->
-                <div
-                    class="program-card hidden flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
-                    <div>
-                        <h3 class="font-bold text-xl mb-3">GO BEASISWA</h3>
-                        <p class="opacity-80">
-                            Persiapan tes LPDP & beasiswa luar negeri.
-                        </p>
-                    </div>
-
-                    <div class="mt-6 space-y-3">
-                        <button
-                            class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                            Daftar Sekarang
-                        </button>
-
-                        <a href="#"
-                            class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
-                            Selengkapnya
-                        </a>
-                    </div>
-                </div>
-
-                <!-- PROGRAM 5 (Hidden awal) -->
-                <div
-                    class="program-card hidden flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
-                    <div>
-                        <h3 class="font-bold text-xl mb-3">GO ENGLISH</h3>
-                        <p class="opacity-80">
-                            Speaking, TOEFL & IELTS preparation modern.
-                        </p>
-                    </div>
-
-                    <div class="mt-6 space-y-3">
-                        <button
-                            class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                            Daftar Sekarang
-                        </button>
-
-                        <a href="#"
-                            class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
-                            Selengkapnya
-                        </a>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- BUTTON LOAD MORE -->
-            <div class="mt-12">
-                <button id="loadMoreBtn"
-                    class="px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:opacity-90 transition">
-                    Lihat Program Lain
-                </button>
+            <!-- ================= PROGRAM ================= -->
+            <div id="programSection">
+
+                <p class="mb-12 opacity-80">
+                    Platform Bimbel SKD, Psikologi & Jasmani Paket Lengkap! <br>
+                    GO KEDINASAN / TNI / POLRI • GO CPNS • GO BEASISWA • GO ENGLISH
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-10">
+
+                    <!-- CARD -->
+                    <div
+                        class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">GO CPNS</h3>
+                            <p class="opacity-80">Latihan CAT + pembahasan AI.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button onclick="sing()" class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Daftar Sekarang
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">GO KEDINASAN</h3>
+                            <p class="opacity-80">Persiapan sekolah kedinasan lengkap.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button onclick="sing()" class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Daftar Sekarang
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="program-card flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">GO TNI / POLRI</h3>
+                            <p class="opacity-80">Latihan psikologi & jasmani.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button onclick="sing()" class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Daftar Sekarang
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hidden awal -->
+                    <div
+                        class="program-card hidden flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">GO BEASISWA</h3>
+                            <p class="opacity-80">Persiapan LPDP & luar negeri.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button onclick="sing()" class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Daftar Sekarang
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- LOAD MORE -->
+                <div class="mt-12">
+                    <button id="loadMoreBtn"
+                        class="px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:opacity-90 transition">
+                        Lihat Program Lain
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= PAKET ================= -->
+            <div id="paketSection" class="hidden">
+
+                <p class="mb-12 opacity-80">
+                    Pilih paket belajar sesuai kebutuhanmu.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-10">
+
+                    <!-- tampil awal -->
+                    <div
+                        class="paket-card flex flex-col justify-between p-8 rounded-2xl shadow-lg bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">Paket Basic</h3>
+                            <p>Akses latihan soal & tryout.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Beli Paket
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="paket-card flex flex-col justify-between p-8 rounded-2xl shadow-lg bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">Paket Premium</h3>
+                            <p>Tryout + pembahasan AI.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Beli Paket
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="paket-card flex flex-col justify-between p-8 rounded-2xl shadow-lg bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">Paket Elite</h3>
+                            <p>Mentoring intensif sampai lulus.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Beli Paket
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- hidden awal -->
+                    <div
+                        class="paket-card hidden flex flex-col justify-between p-8 rounded-2xl shadow-lg bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">Paket Platinum</h3>
+                            <p>Full mentoring + strategi pribadi.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Beli Paket
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="paket-card hidden flex flex-col justify-between p-8 rounded-2xl shadow-lg bg-soft dark:bg-gray-900">
+                        <div>
+                            <h3 class="font-bold text-xl mb-3">Paket Private</h3>
+                            <p>Kelas eksklusif 1 on 1.</p>
+                        </div>
+                        <div class="mt-6 space-y-3">
+                            <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold">
+                                Beli Paket
+                            </button>
+                            <a href="#"
+                                class="block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition">
+                                Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOAD MORE PAKET -->
+                <div class="mt-12">
+                    <button id="loadMorePaket" class="px-8 py-3 bg-accent text-white rounded-xl font-semibold">
+                        Lihat Paket Lain
+                    </button>
+                </div>
+
             </div>
 
         </div>
     </section>
-
 
     <!-- ================= KEUNGGULAN ================= -->
     <section id="keunggulan" class="py-24 bg-soft dark:bg-gray-900">
@@ -447,7 +526,7 @@
                     <h4 class="font-semibold mb-4">Menu</h4>
                     <ul class="space-y-2 text-sm opacity-90">
                         <li><a href="#" class="hover:text-accent">Beranda</a></li>
-                        <li><a href="#program" class="hover:text-accent">Program</a></li>
+                        <li><a href="#product" class="hover:text-accent">Produk</a></li>
                         <li><a href="#keunggulan" class="hover:text-accent">Keunggulan</a></li>
                         <li><a href="#faq" class="hover:text-accent">FAQ</a></li>
                     </ul>
@@ -456,10 +535,10 @@
 
                 <!-- PROGRAM -->
                 <div>
-                    <h4 class="font-semibold mb-4">Program</h4>
+                    <h4 class="font-semibold mb-4">Produk</h4>
                     <ul class="space-y-2 text-sm opacity-90">
-                        <li><a href="#" class="hover:text-accent">Persiapan CPNS</a></li>
-                        <li><a href="#" class="hover:text-accent">Tryout Online</a></li>
+                        <li><a href="#product" class="hover:text-accent">Program</a></li>
+                        <li><a href="#product" class="hover:text-accent">Paket</a></li>
                     </ul>
                 </div>
 
@@ -494,9 +573,104 @@
         </div>
     </footer>
 
+    <!-- SCROLL TO TOP -->
+    <button id="scrollTopBtn" class="fixed bottom-6 right-6 hidden items-center justify-center
+           w-12 h-12 rounded-full bg-accent text-white shadow-lg
+           hover:scale-110 transition duration-300 z-50">
+
+        <!-- icon panah -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+    <!-- ===== STYLE MINI (BIAR CLEAN) ===== -->
+    <style>
+        .card-item {
+            @apply flex flex-col justify-between p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition bg-soft dark:bg-gray-900;
+        }
+
+        .card-action {
+            @apply mt-6 space-y-3;
+        }
+
+        .btn-primary {
+            @apply w-full bg-accent text-white py-3 rounded-xl font-semibold;
+        }
+
+        .btn-outline {
+            @apply block text-center w-full border border-white px-7 py-3 rounded-xl hover:bg-white hover:text-primary transition;
+        }
+    </style>
 
     <!-- ================= SCRIPT ================= -->
     <script>
+
+
+        function sing() {
+            window.location.href = './auth.html'
+        }
+
+        // =============== SCROLL UP ===================
+        const scrollBtn = document.getElementById("scrollTopBtn");
+
+        /* tampilkan tombol saat scroll */
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.remove("hidden");
+                scrollBtn.classList.add("flex");
+            } else {
+                scrollBtn.classList.add("hidden");
+                scrollBtn.classList.remove("flex");
+            }
+        });
+
+        /* smooth scroll ke atas */
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // ===================== SWITCH SCRIPT ===================
+        const btnProgram = document.getElementById('btnProgram');
+        const btnPaket = document.getElementById('btnPaket');
+        const programSection = document.getElementById('programSection');
+        const paketSection = document.getElementById('paketSection');
+
+        /* SWITCH TAB */
+        btnProgram.onclick = () => {
+            programSection.classList.remove('hidden');
+            paketSection.classList.add('hidden');
+
+            btnProgram.classList.add('bg-accent', 'text-white');
+            btnPaket.classList.remove('bg-accent', 'text-white');
+        };
+
+        btnPaket.onclick = () => {
+            paketSection.classList.remove('hidden');
+            programSection.classList.add('hidden');
+
+            btnPaket.classList.add('bg-accent', 'text-white');
+            btnProgram.classList.remove('bg-accent', 'text-white');
+        };
+
+        /* LOAD PROGRAM */
+        document.getElementById("loadMoreBtn").onclick = () => {
+            document.querySelectorAll(".program-card.hidden")
+                .forEach(el => el.classList.remove("hidden"));
+
+            document.getElementById("loadMoreBtn").style.display = "none";
+        };
+
+        /* LOAD PAKET */
+        document.getElementById("loadMorePaket").onclick = () => {
+            document.querySelectorAll(".paket-card.hidden")
+                .forEach(el => el.classList.remove("hidden"));
+
+            document.getElementById("loadMorePaket").style.display = "none";
+        };
+
         const loadBtn = document.getElementById("loadMoreBtn");
         const hiddenCards = document.querySelectorAll(".program-card.hidden");
 

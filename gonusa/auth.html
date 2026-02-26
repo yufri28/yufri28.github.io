@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign In - GoNusa Institute</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ================= TAILWIND CONFIG ================= -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#052C70",
+                        accent: "#BB811F",
+                        soft: "#F5F7FB"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, .7);
+        }
+
+        .dark .glass {
+            background: rgba(17, 24, 39, .6);
+        }
+    </style>
+
+    <!-- ===== AUTO LOAD THEME (SYNC LANDING) ===== -->
+    <script>
+            (function () {
+                const theme = localStorage.getItem("theme");
+
+                if (
+                    theme === "dark" ||
+                    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+                ) {
+                    document.documentElement.classList.add("dark");
+                }
+            })();
+    </script>
+
+</head>
+
+<body class="bg-soft dark:bg-gray-900
+             text-gray-800 dark:text-gray-200
+             min-h-screen flex items-center justify-center
+             transition-colors duration-300 px-4">
+
+    <!-- ================= CONTAINER ================= -->
+    <div class="w-full max-w-5xl grid md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
+        <!-- ========= LEFT SIDE (BRANDING) ========= -->
+        <div class="hidden md:flex flex-col justify-center p-12 text-white"
+            style="background:linear-gradient(135deg,#052C70,#1E63D6);">
+
+            <h1 class="text-4xl font-bold leading-tight">
+                GoNusa Institute 🚀
+            </h1>
+
+            <p class="mt-6 opacity-90">
+                Platform Bimbel SKD, Psikologi & Jasmani Paket Lengkap.
+            </p>
+
+            <ul class="mt-6 space-y-2 opacity-90">
+                <li>✔ GO CPNS</li>
+                <li>✔ GO KEDINASAN / TNI / POLRI</li>
+                <li>✔ GO BEASISWA</li>
+                <li>✔ GO ENGLISH</li>
+            </ul>
+        </div>
+
+
+        <!-- ========= FORM SIDE ========= -->
+        <div class="glass p-8 md:p-10">
+
+            <!-- HEADER -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary dark:text-white">
+                    Selamat Datang 👋
+                </h2>
+
+                <!-- THEME TOGGLE -->
+                <button id="themeToggle" class="w-10 h-10 rounded-lg border flex items-center justify-center">
+                    🌙
+                </button>
+            </div>
+
+            <!-- SWITCH -->
+            <div class="flex bg-soft dark:bg-gray-800 rounded-xl p-1 mb-6">
+                <button id="showLogin" class="w-1/2 py-2 rounded-lg bg-primary text-white font-semibold">
+                    Sign In
+                </button>
+
+                <button id="showRegister" class="w-1/2 py-2 rounded-lg font-semibold text-primary dark:text-white">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- ================= LOGIN ================= -->
+            <form id="loginForm" class="space-y-4">
+
+                <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-xl border dark:border-gray-700
+                bg-white dark:bg-gray-800 focus:ring-2 focus:ring-accent outline-none">
+
+                <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-xl border dark:border-gray-700
+                bg-white dark:bg-gray-800 focus:ring-2 focus:ring-accent outline-none">
+
+                <button class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90">
+                    Sign In
+                </button>
+
+                <!-- GOOGLE LOGIN -->
+                <a href="/auth/google" class="flex items-center justify-center gap-3 w-full border
+                dark:border-gray-700 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5">
+                    Sign In dengan Google
+                </a>
+            </form>
+
+
+            <!-- ================= REGISTER ================= -->
+            <form id="registerForm" class="space-y-4 hidden">
+
+                <input type="text" placeholder="Nama Lengkap" class="w-full px-4 py-3 rounded-xl border dark:border-gray-700
+                bg-white dark:bg-gray-800 focus:ring-2 focus:ring-accent outline-none">
+
+                <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-xl border dark:border-gray-700
+                bg-white dark:bg-gray-800 focus:ring-2 focus:ring-accent outline-none">
+
+                <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-xl border dark:border-gray-700
+                bg-white dark:bg-gray-800 focus:ring-2 focus:ring-accent outline-none">
+
+                <button class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:opacity-90">
+                    Buat Akun
+                </button>
+            </form>
+
+        </div>
+        <!-- BACK BUTTON -->
+        <a href="index.html" class="absolute top-6 left-6 flex items-center gap-2
+        px-4 py-2 rounded-xl glass shadow hover:scale-105 transition">
+
+            <!-- ICON ARROW -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary dark:text-white" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+
+            <span class="font-medium text-primary dark:text-white">
+                Kembali
+            </span>
+        </a>
+    </div>
+
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+
+        /* ===== SWITCH FORM ===== */
+        const loginBtn = document.getElementById("showLogin");
+        const registerBtn = document.getElementById("showRegister");
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+
+        loginBtn.onclick = () => {
+            loginForm.classList.remove("hidden");
+            registerForm.classList.add("hidden");
+
+            loginBtn.classList.add("bg-primary", "text-white");
+            registerBtn.classList.remove("bg-primary", "text-white");
+        };
+
+        registerBtn.onclick = () => {
+            registerForm.classList.remove("hidden");
+            loginForm.classList.add("hidden");
+
+            registerBtn.classList.add("bg-primary", "text-white");
+            loginBtn.classList.remove("bg-primary", "text-white");
+        };
+
+
+        /* ===== GLOBAL DARK MODE (SYNC LANDING) ===== */
+        const toggle = document.getElementById("themeToggle");
+
+        function setTheme(mode) {
+            if (mode === "dark") {
+                document.documentElement.classList.add("dark");
+                localStorage.theme = "dark";
+                toggle.textContent = "☀️";
+            } else {
+                document.documentElement.classList.remove("dark");
+                localStorage.theme = "light";
+                toggle.textContent = "🌙";
+            }
+        }
+
+        toggle.onclick = () => {
+            const dark = document.documentElement.classList.contains("dark");
+            setTheme(dark ? "light" : "dark");
+        };
+
+        setTheme(localStorage.theme === "dark" ? "dark" : "light");
+
+    </script>
+
+</body>
+
+</html>
