@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bible Coding Competition 2026</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuedraggable@4.1.0/dist/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        .ghost-card {
+            opacity: 0.5;
+            background: #cbd5e1;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        input:focus {
+            transform: scale(1.05);
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 font-sans select-none">
+    <div id="app" class="max-w-md mx-auto min-h-screen flex flex-col shadow-2xl bg-white">
+
+        <header class="bg-indigo-700 text-white p-4 shadow-lg sticky top-0 z-50">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">{{ currentSessionTitle }}</h1>
+                    <p class="text-xs text-indigo-200">Kelompok: {{ teamName || 'Belum Login' }}</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-black">{{ timer }}s</span>
+                </div>
+            </div>
+        </header>
+
+        <main v-if="step === 'login'" class="flex-grow flex items-center justify-center p-6 bg-slate-100">
+            <div class="bg-white p-8 rounded-2xl shadow-xl w-full animate__animated animate__fadeIn">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center">Registrasi Lomba</h2>
+                <input v-model="teamName" type="text" placeholder="Nama Kelompok"
+                    class="w-full p-4 border-2 border-slate-200 rounded-xl mb-4 focus:border-indigo-500 outline-none">
+                <button @click="startLomba"
+                    class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-indigo-700 transition">
+                    MULAI SEKARANG
+                </button>
+            </div>
+        </main>
+
+        <main v-if="step === 'sesi1'" class="p-4 flex-grow animate__animated animate__fadeIn">
+            <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 mb-4">
+                <p class="text-sm font-bold text-indigo-600">TEBAK KATA:</p>
+                <p class="text-xs text-slate-600 italic">Ketik jawaban sesuai petunjuk emoji di bawah.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-md text-center border border-slate-100">
+                <div class="h-32 bg-slate-50 rounded-xl mb-6 flex items-center justify-center text-5xl">
+                    {{ currentS1.hint }}
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-1 mb-8">
+                    <template v-for="(char, i) in currentS1.answer" :key="i">
+                        <div v-if="char === ' '" class="w-4"></div>
+                        <input v-else v-model="s1Inputs[i]" maxlength="1" :id="'s1-'+i" @input="handleS1Input(i)"
+                            @keydown.backspace="handleS1Back(i)"
+                            class="w-8 h-10 border-2 border-slate-300 rounded-lg text-center font-bold uppercase focus:border-indigo-500 focus:bg-indigo-50 outline-none transition-all">
+                    </template>
+                </div>
+
+                <button @click="checkS1" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold shadow-lg">
+                    VERIFIKASI JAWABAN
+                </button>
+            </div>
+        </main>
+
+        <main v-if="step === 'sesi2'" class="p-4 flex-grow animate__animated animate__fadeIn">
+            <div class="bg-green-50 p-4 rounded-2xl border border-green-100 mb-4">
+                <p class="text-sm font-bold text-green-700">LENGKAPI AYAT:</p>
+                <p class="text-xs text-slate-600 italic">Cari kata yang hilang dari referensi ayat berikut.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100">
+                <h3 class="font-bold text-indigo-800 mb-2 text-xl">{{ currentS2.verseRef }}</h3>
+                <p class="text-lg leading-relaxed mb-8 text-slate-700 italic">"{{ currentS2.text }}"</p>
+
+                <input v-model="s2Input" type="text" placeholder="Ketik kata yang hilang..."
+                    class="w-full p-4 border-2 border-slate-200 rounded-xl mb-4 uppercase font-bold focus:border-green-500 outline-none">
+
+                <button @click="checkS2"
+                    class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg">
+                    SUBMIT
+                </button>
+            </div>
+        </main>
+
+        <main v-if="step === 'sesi3'" class="p-4 flex-grow overflow-y-auto no-scrollbar">
+            <div
+                class="bg-slate-800 text-yellow-400 p-4 rounded-xl mb-4 text-[11px] leading-tight font-mono border border-yellow-900/50">
+                // LOGIC HINT:<br>
+                1. Petrus di No.1 | 2. Yohanes di sebelah Petrus<br>
+                3. Yudas di paling akhir (12) | 4. Matius No.11
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-6">
+                <div v-for="n in 12" :key="n"
+                    class="bg-slate-50 h-24 rounded-xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center relative">
+                    <span class="absolute top-1 left-2 text-[10px] font-bold text-slate-400">POS {{ n }}</span>
+
+                    <draggable :list="seats[n-1]" group="apostles" item-key="id"
+                        class="w-full h-full flex items-center justify-center p-1">
+                        <template #item="{element}">
+                            <div
+                                class="w-full h-full bg-indigo-600 text-white rounded-lg shadow-md flex items-center justify-center text-[10px] font-bold text-center p-1 animate__animated animate__bounceIn">
+                                {{ element.name }}
+                            </div>
+                        </template>
+                    </draggable>
+                </div>
+            </div>
+
+            <div class="bg-slate-100 p-4 rounded-2xl shadow-inner min-h-[120px] mb-6">
+                <p class="text-[10px] text-slate-500 mb-2 text-center font-bold">DAFTAR RASUL (DRAG KE POSISI)</p>
+                <draggable :list="apostleDeck" group="apostles" item-key="id"
+                    class="flex flex-wrap gap-2 justify-center">
+                    <template #item="{element}">
+                        <div
+                            class="px-3 py-2 bg-white rounded-lg border border-slate-300 shadow-sm text-[10px] font-bold cursor-move hover:bg-indigo-50 transition-colors">
+                            {{ element.name }}
+                        </div>
+                    </template>
+                </draggable>
+            </div>
+
+            <button @click="checkS3"
+                class="w-full bg-yellow-500 text-slate-900 py-4 rounded-xl font-black uppercase shadow-lg active:scale-95 transition-transform">
+                VALIDASI ALGORITMA
+            </button>
+        </main>
+
+        <footer v-if="step !== 'login'" class="p-4 bg-white border-t border-slate-200">
+            <div class="flex gap-2">
+                <div v-for="s in 3" :key="s" :class="getStepClass(s)"
+                    class="h-2 flex-grow rounded-full transition-all duration-500"></div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted, nextTick } = Vue;
+
+        createApp({
+            components: {
+                draggable: window.vuedraggable
+            },
+            setup() {
+                const teamName = ref(localStorage.getItem('teamName') || '');
+                const step = ref(localStorage.getItem('currentStep') || 'login');
+                const timer = ref(parseInt(localStorage.getItem('timer')) || 0);
+
+                // --- DATA SESI 1 ---
+                const s1Data = [
+                    { id: 1, hint: '🚢🌊🦒', answer: 'BAHTERA NUH' },
+                    { id: 2, hint: '🍞🍷', answer: 'PERJAMUAN' },
+                    { id: 3, hint: '🔥📜', answer: 'SEPULUH PERINTAH' }
+                ];
+                const s1Index = ref(parseInt(localStorage.getItem('s1Index')) || 0);
+                const s1Inputs = ref([]);
+
+                const currentS1 = computed(() => s1Data[s1Index.value] || s1Data[0]);
+
+                // --- DATA SESI 2 ---
+                const s2Data = [
+                    { verseRef: 'Yohanes 11:35', text: 'Maka Yesus pun ___.', answer: 'MENANGIS' },
+                    { verseRef: 'Filipi 4:13', text: 'Segala perkara dapat kutanggung di dalam Dia yang memberi ___ kepadaku.', answer: 'KEKUATAN' }
+                ];
+                const s2Index = ref(0);
+                const s2Input = ref('');
+                const currentS2 = computed(() => s2Data[s2Index.value] || s2Data[0]);
+
+                // --- DATA SESI 3 ---
+                const apostles = [
+                    { id: 1, name: 'Petrus' }, { id: 2, name: 'Yohanes' }, { id: 3, name: 'Andreas' },
+                    { id: 4, name: 'Bartolomeus' }, { id: 5, name: 'Filipus' }, { id: 6, name: 'Simon' },
+                    { id: 7, name: 'Tadeus' }, { id: 8, name: 'Tomas' }, { id: 9, name: 'Yakobus A' },
+                    { id: 10, name: 'Yakobus Z' }, { id: 11, name: 'Matius' }, { id: 12, name: 'Yudas' }
+                ];
+                const apostleDeck = ref([...apostles].sort(() => Math.random() - 0.5));
+                const seats = ref(Array.from({ length: 12 }, () => []));
+
+                // --- LOGIKA SESI 1 ---
+                const handleS1Input = (i) => {
+                    if (s1Inputs.value[i]) {
+                        // Cari input box berikutnya yang tidak terhalang spasi
+                        let nextIdx = i + 1;
+                        while (currentS1.value.answer[nextIdx] === ' ') nextIdx++;
+
+                        const nextEl = document.getElementById(`s1-${nextIdx}`);
+                        if (nextEl) nextEl.focus();
+                    }
+                };
+
+                const handleS1Back = (i) => {
+                    if (!s1Inputs.value[i]) {
+                        let prevIdx = i - 1;
+                        while (currentS1.value.answer[prevIdx] === ' ') prevIdx--;
+
+                        const prevEl = document.getElementById(`s1-${prevIdx}`);
+                        if (prevEl) prevEl.focus();
+                    }
+                };
+
+                const checkS1 = () => {
+                    const finalAns = s1Inputs.value.join('').toUpperCase();
+                    const correctAns = currentS1.value.answer.replace(/\s/g, '').toUpperCase();
+
+                    if (finalAns === correctAns) {
+                        if (s1Index.value < s1Data.length - 1) {
+                            s1Index.value++;
+                            s1Inputs.value = [];
+                            localStorage.setItem('s1Index', s1Index.value);
+                            alert('Benar! Lanjut soal berikutnya.');
+                        } else {
+                            step.value = 'sesi2';
+                            localStorage.setItem('currentStep', 'sesi2');
+                        }
+                    } else {
+                        alert('Jawaban kurang tepat, coba lagi!');
+                    }
+                };
+
+                // --- LOGIKA SESI 2 ---
+                const checkS2 = () => {
+                    if (s2Input.value.trim().toUpperCase() === currentS2.value.answer) {
+                        if (s2Index.value < s2Data.length - 1) {
+                            s2Index.value++;
+                            s2Input.value = '';
+                            alert('Luar biasa! Satu ayat lagi.');
+                        } else {
+                            step.value = 'sesi3';
+                            localStorage.setItem('currentStep', 'sesi3');
+                        }
+                    } else {
+                        alert('Kata tersebut tidak sesuai.');
+                    }
+                };
+
+                // --- LOGIKA SESI 3 ---
+                const checkS3 = () => {
+                    const userOrder = seats.value.map(s => s[0]?.name || '');
+                    const correctOrder = ["Petrus", "Yohanes", "Andreas", "Bartolomeus", "Filipus", "Simon", "Tadeus", "Tomas", "Yakobus A", "Yakobus Z", "Matius", "Yudas"];
+
+                    let score = 0;
+                    userOrder.forEach((name, i) => {
+                        if (name === correctOrder[i]) score++;
+                    });
+
+                    if (score === 12) {
+                        alert(`PERFECT! Skor: ${score}/12. Anda berhasil menyelesaikan kompetisi!`);
+                        // Logic kirim data ke backend/GAS
+                    } else {
+                        alert(`Skor Anda: ${score}/12. Periksa kembali urutannya!`);
+                    }
+                };
+
+                const startLomba = () => {
+                    if (teamName.value.trim().length >= 3) {
+                        localStorage.setItem('teamName', teamName.value);
+                        step.value = 'sesi1';
+                        localStorage.setItem('currentStep', 'sesi1');
+                    } else {
+                        alert('Nama minimal 3 karakter!');
+                    }
+                };
+
+                const currentSessionTitle = computed(() => {
+                    const titles = { login: 'Registrasi', sesi1: 'Sesi 1: Emoji Code', sesi2: 'Sesi 2: Missing Word', sesi3: 'Sesi 3: Apostle Sort' };
+                    return titles[step.value] || 'Bible Competition';
+                });
+
+                const getStepClass = (s) => {
+                    const curr = parseInt(step.value.replace('sesi', '')) || 0;
+                    if (s < curr) return 'bg-green-500 w-full';
+                    if (s === curr) return 'bg-indigo-500 w-full animate-pulse';
+                    return 'bg-slate-200 w-full';
+                };
+
+                onMounted(() => {
+                    setInterval(() => {
+                        if (step.value !== 'login') {
+                            timer.value++;
+                            localStorage.setItem('timer', timer.value);
+                        }
+                    }, 1000);
+                });
+
+                return {
+                    teamName, step, timer, currentSessionTitle,
+                    s1Inputs, currentS1, handleS1Input, handleS1Back, checkS1,
+                    s2Input, currentS2, checkS2,
+                    apostleDeck, seats, checkS3, startLomba, getStepClass
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

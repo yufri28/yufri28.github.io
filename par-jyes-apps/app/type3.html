@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bible Competition 2026 - Fixed UI</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuedraggable@4.1.0/dist/vuedraggable.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Gaya Input Karakter Premium (Sama seperti gambar) */
+        .input-char {
+            /* Gunakan ukuran relatif (rem) agar responsive */
+            width: 2rem;
+            height: 2.8rem;
+            @apply border-2 border-slate-300 rounded-xl text-center font-black uppercase outline-none transition-all duration-200 bg-white text-indigo-900 shadow-sm text-lg;
+        }
+
+        /* Efek saat dipilih (Focus) */
+        .input-char:focus {
+            @apply border-indigo-600 bg-indigo-50 ring-4 ring-indigo-100 scale-105 z-10 shadow-lg;
+        }
+
+        /* Jarak antar kata */
+        .word-gap {
+            @apply w-full h-px;
+            /* Membuat baris baru atau jarak lebar jika satu baris */
+        }
+
+        /* Penyesuaian untuk layar sangat kecil */
+        @media (max-width: 360px) {
+            .input-char {
+                width: 1.7rem;
+                height: 2.5rem;
+                @apply rounded-lg border text-sm;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 font-sans shadow-inner overflow-hidden">
+    <div id="app" v-cloak class="max-w-md mx-auto h-screen flex flex-col bg-white relative overflow-hidden">
+
+        <header class="bg-indigo-800 text-white p-4 shadow-md shrink-0">
+            <div class="flex justify-between items-center">
+                <div class="truncate mr-4">
+                    <h1 class="font-black text-sm uppercase tracking-tight">{{ currentSessionTitle }}</h1>
+                    <p class="text-[10px] text-indigo-200 truncate italic">Team: {{ teamName || 'Guest' }}</p>
+                </div>
+                <div class="text-right shrink-0">
+                    <span class="text-2xl font-mono font-black tabular-nums">{{ timer }}<span
+                            class="text-xs">s</span></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow overflow-y-auto no-scrollbar p-4 pb-24">
+
+            <div v-if="step === 'login'" class="h-full flex items-center justify-center">
+                <div class="w-full bg-white p-6 rounded-3xl border border-slate-100 shadow-xl text-center">
+                    <div class="text-5xl mb-4">🏆</div>
+                    <h2 class="text-xl font-black text-slate-800 mb-6">BIBLE CHALLENGE</h2>
+                    <input v-model="teamName" type="text" placeholder="NAMA TIM"
+                        class="w-full p-4 bg-slate-50 border-2 border-transparent rounded-2xl mb-4 focus:border-indigo-500 outline-none text-center font-bold uppercase">
+                    <button @click="startLomba"
+                        class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg active:scale-95 transition-all">START</button>
+                </div>
+            </div>
+
+            <div v-if="isWaiting" class="h-full flex flex-col items-center justify-center text-center p-4">
+                <template v-if="!isEliminated">
+                    <div
+                        class="w-20 h-20 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin mb-6">
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">Sesi Selesai!</h2>
+                    <p class="text-xs text-slate-500 mb-6 px-4">Mohon tunggu instruksi juri sebelum menekan tombol cek
+                        status.</p>
+                    <button @click="checkStatus"
+                        class="w-full max-w-xs bg-indigo-600 text-white py-3 rounded-xl font-bold shadow-md">CEK
+                        KELOLOSAN</button>
+                </template>
+                <template v-else>
+                    <div class="text-6xl mb-4">🚫</div>
+                    <h2 class="text-2xl font-black text-red-600 mb-2">TERELIMINASI</h2>
+                    <p class="text-sm text-slate-500 mb-6 italic px-8">Maaf, perjalanan tim <b>{{teamName}}</b> terhenti
+                        di sesi ini.</p>
+                    <button @click="resetApp"
+                        class="px-8 py-3 bg-slate-800 text-white rounded-xl font-bold">KELUAR</button>
+                </template>
+            </div>
+
+            <main v-if="step === 'sesi1' && !isWaiting" class="p-4 flex-grow animate__animated animate__fadeIn">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-black text-indigo-500 uppercase tracking-widest">Sesi 1</span>
+                        <h2 class="text-xl font-black text-slate-800">EMOJI CODE</h2>
+                    </div>
+                    <span
+                        class="px-3 py-1 bg-indigo-600 text-white rounded-full text-[10px] font-black shadow-md tabular-nums">
+                        {{ s1Index + 1 }} / {{ s1Data.length }}
+                    </span>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-[2rem] shadow-2xl border border-slate-100 text-center relative overflow-hidden box-glow">
+                    <div
+                        class="h-36 bg-slate-50 rounded-2xl mb-8 flex items-center justify-center text-7xl shadow-inner border border-slate-100">
+                        {{ currentS1.hint }}
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-x-1.5 gap-y-3 mb-12">
+                        <template v-for="(kata, wordIndex) in currentS1.answer.split(' ')" :key="'word-'+wordIndex">
+
+                            <template v-for="(char, charIndex) in kata" :key="'char-'+charIndex">
+                                <input v-model="s1Inputs[getGlobalIndex(wordIndex, charIndex)]" maxlength="1"
+                                    :id="'s1-'+getGlobalIndex(wordIndex, charIndex)"
+                                    @input="handleS1Input(getGlobalIndex(wordIndex, charIndex))"
+                                    @keydown.backspace="handleS1Back(getGlobalIndex(wordIndex, charIndex))"
+                                    class="input-char shadow">
+                            </template>
+
+                            <div v-if="wordIndex < currentS1.answer.split(' ').length - 1"
+                                class="w-full md:w-auto h-2 md:h-auto"></div>
+                        </template>
+                    </div>
+
+                    <button @click="nextS1"
+                        class="w-full bg-indigo-600 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-all text-lg tracking-wide border-b-4 border-indigo-800 active:border-b-0 active:translate-y-1">
+                        SOAL BERIKUTNYA
+                    </button>
+                </div>
+            </main>
+
+            <div v-if="step === 'sesi2' && !isWaiting" class="animate__animated animate__fadeIn">
+                <p class="text-[10px] font-black text-green-500 mb-2 uppercase tracking-tighter">Session 02: Missing
+                    Word</p>
+                <div class="bg-white border-2 border-slate-50 rounded-3xl p-6 shadow-sm mb-6">
+                    <h3 class="text-indigo-600 font-black text-lg mb-3">{{ currentS2.verseRef }}</h3>
+                    <p class="text-slate-700 text-lg leading-relaxed italic">"{{ currentS2.text }}"</p>
+                </div>
+                <input v-model="s2Input" type="text" placeholder="Lengkapi kata..."
+                    class="w-full p-4 bg-slate-100 border-2 border-transparent rounded-2xl mb-4 focus:border-green-500 focus:bg-white outline-none font-black text-center uppercase tracking-widest transition-all">
+                <button @click="nextS2"
+                    class="w-full bg-green-600 text-white py-4 rounded-2xl font-black shadow-lg">SUBMIT JAWABAN</button>
+            </div>
+
+            <div v-if="step === 'sesi_secret' && !isWaiting" class="animate__animated animate__fadeIn">
+                <div class="bg-gradient-to-r from-purple-700 to-indigo-700 p-5 rounded-3xl text-white mb-4 shadow-lg">
+                    <h2 class="font-black">THE SECRET MESSAGE</h2>
+                    <p class="text-[9px] opacity-70">DEKRIPSI KUBUR KOSONG</p>
+                </div>
+                <div class="bg-white border rounded-3xl p-4 text-center mb-4">
+                    <div class="flex justify-center gap-1.5 mb-3">
+                        <span v-for="s in ['⭐', '🌀', '☀️', '⚡', '☁️', '💎']"
+                            class="text-xl bg-slate-50 p-2 rounded-lg border shadow-sm">{{s}}</span>
+                    </div>
+                    <div
+                        class="grid grid-cols-4 gap-1 text-[8px] font-mono bg-slate-900 text-yellow-400 p-2 rounded-xl border border-yellow-500/20 mb-3">
+                        <div>⭐=A</div>
+                        <div>☀️=G</div>
+                        <div>⚡=K</div>
+                        <div>💎=T</div>
+                        <div>🌀=N</div>
+                        <div>☁️=I</div>
+                        <div>🌙=B</div>
+                        <div>🔥=P</div>
+                    </div>
+                    <input v-model="secretWordInput" type="text" placeholder="HASIL DEKRIPSI..."
+                        class="w-full p-3 bg-purple-50 border-2 border-purple-100 rounded-xl uppercase font-black text-center outline-none focus:border-purple-500">
+                </div>
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <button v-for="box in secretBoxes" :key="box.id" @click="selectedBox = box.name"
+                        :class="selectedBox === box.name ? 'border-purple-600 bg-purple-100 ring-2 ring-purple-50' : 'border-slate-100 bg-white'"
+                        class="p-3 border-2 rounded-2xl flex flex-col items-center transition-all">
+                        <span class="text-3xl mb-1">{{ box.icon }}</span>
+                        <span class="text-[9px] font-black uppercase">{{ box.name }}</span>
+                    </button>
+                </div>
+                <button @click="nextSecret"
+                    class="w-full bg-purple-700 text-white py-4 rounded-2xl font-black shadow-lg">KONFIRMASI</button>
+            </div>
+
+            <div v-if="step === 'sesi3' && !isWaiting" class="animate__animated animate__fadeIn pb-10">
+                <div class="bg-slate-900 text-indigo-300 p-3 rounded-xl mb-4 text-[9px] font-mono leading-tight">
+                    // Drag nama rasul ke kotak nomor yang tepat.
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div v-for="n in 12" :key="n"
+                        class="bg-slate-50 h-14 rounded-xl border-2 border-dashed border-slate-200 relative">
+                        <span class="absolute top-1 left-2 text-[8px] font-bold text-slate-300">{{ n }}</span>
+                        <draggable :list="seats[n-1]" group="apostles" item-key="id"
+                            class="w-full h-full flex items-center justify-center p-1">
+                            <template #item="{element}">
+                                <div
+                                    class="bg-indigo-600 text-white rounded-lg text-[8px] font-bold p-1 text-center w-full truncate shadow-sm">
+                                    {{ element.name }}
+                                </div>
+                            </template>
+                        </draggable>
+                    </div>
+                </div>
+                <div class="bg-slate-100 p-3 rounded-2xl mb-4">
+                    <draggable :list="apostleDeck" group="apostles" item-key="id"
+                        class="flex flex-wrap gap-2 justify-center">
+                        <template #item="{element}">
+                            <div
+                                class="px-2 py-1.5 bg-white rounded-lg border border-slate-300 text-[9px] font-black cursor-move shadow-sm">
+                                {{ element.name }}
+                            </div>
+                        </template>
+                    </draggable>
+                </div>
+                <button @click="finishCompetition"
+                    class="w-full bg-yellow-500 text-slate-900 py-4 rounded-2xl font-black shadow-lg">SELESAI</button>
+            </div>
+
+        </main>
+
+        <footer v-if="step !== 'login' && !isWaiting"
+            class="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-md border-t border-slate-100">
+            <div class="flex gap-1.5 h-1.5">
+                <div v-for="s in [1, 2, 2.5, 3]" :key="s" :class="getStepClass(s)"
+                    class="flex-grow rounded-full transition-all duration-500"></div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        createApp({
+            components: { draggable: window.vuedraggable },
+            setup() {
+                const teamName = ref(localStorage.getItem('teamName') || '');
+                const step = ref(localStorage.getItem('currentStep') || 'login');
+                const timer = ref(parseInt(localStorage.getItem('timer')) || 0);
+                const totalScore = ref(parseInt(localStorage.getItem('totalScore')) || 0);
+                const isWaiting = ref(localStorage.getItem('isWaiting') === 'true');
+                const isEliminated = ref(localStorage.getItem('isEliminated') === 'true');
+
+                const s1Data = [
+                    { hint: '🚢🌊🦒', answer: 'BAHTERA NUH' },
+                    { hint: '🍞🍷', answer: 'PERJAMUAN' },
+                    { hint: '🔥📜', answer: 'SEPULUH PERINTAH' }
+                ];
+                const s2Data = [
+                    { verseRef: 'Yohanes 11:35', text: 'Maka Yesus pun ___.', answer: 'MENANGIS' },
+                    { verseRef: 'Kejadian 1:1', text: 'Pada mulanya Allah menciptakan langit dan ___.', answer: 'BUMI' }
+                ];
+
+                const s1Index = ref(0);
+                const s1Inputs = ref([]);
+                const currentS1 = computed(() => s1Data[s1Index.value]);
+
+                const s2Index = ref(0);
+                const s2Input = ref('');
+                const currentS2 = computed(() => s2Data[s2Index.value]);
+
+                const secretWordInput = ref('');
+                const selectedBox = ref('');
+                const secretBoxes = [
+                    { id: 1, name: 'BATU', icon: '🪨' }, { id: 2, name: 'MALAIKAT', icon: '👼' },
+                    { id: 3, name: 'KAIN KAFAN', icon: '🧣' }, { id: 4, name: 'KUBUR', icon: '🪦' }
+                ];
+
+                const apostles = [
+                    { id: 1, name: 'Petrus' }, { id: 2, name: 'Yohanes' }, { id: 3, name: 'Andreas' },
+                    { id: 4, name: 'Bartolomeus' }, { id: 5, name: 'Filipus' }, { id: 6, name: 'Simon' },
+                    { id: 7, name: 'Tadeus' }, { id: 8, name: 'Tomas' }, { id: 9, name: 'Yakobus A' },
+                    { id: 10, name: 'Yakobus Z' }, { id: 11, name: 'Matius' }, { id: 12, name: 'Yudas' }
+                ];
+                const apostleDeck = ref([...apostles].sort(() => Math.random() - 0.5));
+                const seats = ref(Array.from({ length: 12 }, () => []));
+
+                const checkStatus = () => {
+                    alert("Admin belum mengupdate status. Mohon tunggu pengumuman juri.");
+                    // Simulasi: setWaiting(false) untuk lanjut
+                };
+
+                const setWaiting = (val) => {
+                    isWaiting.value = val;
+                    localStorage.setItem('isWaiting', val);
+                };
+
+                const nextS1 = () => {
+                    const ans = s1Inputs.value.join('').toUpperCase();
+                    if (ans === currentS1.value.answer.replace(/\s/g, '')) totalScore.value += 10;
+                    if (s1Index.value < s1Data.length - 1) {
+                        s1Index.value++; s1Inputs.value = [];
+                    } else {
+                        setWaiting(true); step.value = 'sesi2'; saveState();
+                    }
+                };
+
+                const handleS1Input = (i) => {
+                    if (s1Inputs.value[i]) {
+                        let nextIdx = i + 1;
+                        while (currentS1.value.answer[nextIdx] === ' ') nextIdx++;
+                        document.getElementById(`s1-${nextIdx}`)?.focus();
+                    }
+                };
+
+                const handleS1Back = (i) => {
+                    if (!s1Inputs.value[i]) {
+                        let prevIdx = i - 1;
+                        while (currentS1.value.answer[prevIdx] === ' ') prevIdx--;
+                        document.getElementById(`s1-${prevIdx}`)?.focus();
+                    }
+                };
+
+                const nextS2 = () => {
+                    if (s2Input.value.trim().toUpperCase() === currentS2.value.answer) totalScore.value += 10;
+                    if (s2Index.value < s2Data.length - 1) {
+                        s2Index.value++; s2Input.value = '';
+                    } else {
+                        setWaiting(true); step.value = 'sesi_secret'; saveState();
+                    }
+                };
+
+                const nextSecret = () => {
+                    if (secretWordInput.value.trim().toUpperCase() === 'BANGKIT') totalScore.value += 15;
+                    if (selectedBox.value === 'KUBUR') totalScore.value += 15;
+                    setWaiting(true); step.value = 'sesi3'; saveState();
+                };
+
+                const finishCompetition = () => {
+                    alert(`FINISH! Skor: ${totalScore.value}`);
+                    resetApp();
+                };
+
+                const startLomba = () => {
+                    if (teamName.value.length >= 2) { step.value = 'sesi1'; saveState(); }
+                };
+
+                // Fungsi bantuan untuk menghitung index kotak ke-berapa secara global
+                const getGlobalIndex = (wordIndex, charIndex) => {
+                    // Pecah jawaban jadi kata-kata
+                    const kataKata = currentS1.value.answer.split(' ');
+                    let globalIndex = 0;
+
+                    // Hitung panjang kata-kata sebelumnya
+                    for (let i = 0; i < wordIndex; i++) {
+                        globalIndex += kataKata[i].length;
+                    }
+
+                    // Tambahkan index karakter di kata saat ini
+                    return globalIndex += charIndex;
+                };
+
+                const saveState = () => {
+                    localStorage.setItem('teamName', teamName.value);
+                    localStorage.setItem('currentStep', step.value);
+                    localStorage.setItem('totalScore', totalScore.value);
+                };
+
+                const resetApp = () => { localStorage.clear(); location.reload(); };
+
+                const getStepClass = (s) => {
+                    const stepsMap = { sesi1: 1, sesi2: 2, sesi_secret: 2.5, sesi3: 3 };
+                    const cur = stepsMap[step.value] || 0;
+                    if (s < cur) return 'bg-green-500 w-full';
+                    if (s === cur) return 'bg-indigo-600 w-full animate-pulse';
+                    return 'bg-slate-200 w-full';
+                };
+
+                const currentSessionTitle = computed(() => {
+                    const t = { login: 'REGISTER', sesi1: 'SESI 1', sesi2: 'SESI 2', sesi_secret: 'SESI 2.5', sesi3: 'SESI 3' };
+                    return t[step.value] || 'READY';
+                });
+
+                onMounted(() => {
+                    setInterval(() => {
+                        if (step.value !== 'login' && !isWaiting.value) {
+                            timer.value++;
+                            localStorage.setItem('timer', timer.value);
+                        }
+                    }, 1000);
+                });
+
+                return {
+                    teamName, step, timer, totalScore, isWaiting, isEliminated, currentSessionTitle,
+                    s1Index, s1Inputs, currentS1, s1Data, handleS1Input, handleS1Back, nextS1,
+                    s2Index, s2Input, currentS2, s2Data, nextS2,
+                    secretWordInput, secretBoxes, selectedBox, nextSecret,
+                    apostleDeck, seats, finishCompetition, startLomba, checkStatus, resetApp, getStepClass, getGlobalIndex
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
