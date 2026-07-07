@@ -31,20 +31,14 @@
             background: linear-gradient(135deg, #2C5364 0%, #0F2027 100%);
         }
 
-        /* Animasi card skills & articles */
-        .skill-card,
-        .article-card {
+        /* Animasi card skills */
+        .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .skill-card:hover {
             transform: scale(1.05) rotate(1deg);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -65,8 +59,6 @@
                             translations[currentLang].nav.skills }}</a></li>
                     <li><a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
                             translations[currentLang].nav.projects }}</a></li>
-                    <li><a href="#articles" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
-                            translations[currentLang].nav.articles }}</a></li>
                 </ul>
                 <div class="flex items-center space-x-4">
                     <a href="https://github.com/yufri28" target="_blank"
@@ -199,60 +191,6 @@
             </div>
         </section>
 
-        <!-- Articles / Blog Section -->
-        <section id="articles" class="py-20 px-6 bg-white dark:bg-gray-800 transition-colors duration-300">
-            <div class="container mx-auto max-w-5xl fade-in" ref="articles">
-                <h2 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-gray-100">
-                    {{ translations[currentLang].articles.title }}
-                </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-                    {{ translations[currentLang].articles.subtitle }}
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div v-for="article in articles" :key="article.titleEn"
-                        class="article-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-52 bg-gray-200 dark:bg-gray-600 overflow-hidden">
-                                <img :src="article.image"
-                                    :alt="currentLang === 'en' ? article.titleEn : article.titleId"
-                                    class="w-full h-full object-cover">
-                                <span
-                                    class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
-                                    {{ currentLang === 'en' ? article.categoryEn : article.categoryId }}
-                                </span>
-                            </div>
-                            <div class="p-6">
-                                <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-4">
-                                    <span class="flex items-center gap-1">
-                                        <span class="iconify" data-icon="clarity:calendar-line"></span> {{ article.date
-                                        }}
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <span class="iconify" data-icon="clarity:clock-line"></span> {{ article.readTime
-                                        }}
-                                    </span>
-                                </div>
-                                <h3
-                                    class="text-xl font-bold mb-3 text-gray-900 dark:text-gray-100 line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    {{ currentLang === 'en' ? article.titleEn : article.titleId }}
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3 mb-4">
-                                    {{ currentLang === 'en' ? article.descEn : article.descId }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="px-6 pb-6 pt-2">
-                            <a :href="article.link"
-                                class="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition gap-1">
-                                {{ translations[currentLang].articles.readMore }}
-                                <span class="iconify text-lg" data-icon="line-md:arrow-small-right"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Footer -->
         <footer class="bg-gray-800 dark:bg-gray-900 text-white py-6 px-6 text-center">
             <p>&copy; 2025 {{ translations[currentLang].name }}. {{ translations[currentLang].footer.rights }}</p>
@@ -275,7 +213,6 @@
                                 about: 'About',
                                 skills: 'Languages & Tools',
                                 projects: 'Projects',
-                                articles: 'Articles',
                                 old_web: 'Old Web Profile',
                             },
                             hero: {
@@ -295,11 +232,6 @@
                                 view: 'View Project',
                                 loadMore: 'Load More'
                             },
-                            articles: {
-                                title: 'Articles/Blogs',
-                                subtitle: 'Exploring technology ethics, digital literacy, and modern software engineering perspectives.',
-                                readMore: 'Read Article'
-                            },
                             footer: {
                                 rights: 'All rights reserved.'
                             }
@@ -312,7 +244,6 @@
                                 about: 'Tentang',
                                 skills: 'Bahasa & Alat',
                                 projects: 'Proyek',
-                                articles: 'Artikel',
                                 old_web: 'Web Profil Lama',
                             },
                             hero: {
@@ -331,11 +262,6 @@
                                 title: 'Proyek',
                                 view: 'Lihat Proyek',
                                 loadMore: 'Muat Lebih Banyak'
-                            },
-                            articles: {
-                                title: 'Artikel Terbaru',
-                                subtitle: 'Menjelajahi etika teknologi, literasi digital, dan perspektif rekayasa perangkat lunak modern.',
-                                readMore: 'Baca Artikel'
                             },
                             footer: {
                                 rights: 'Seluruh hak cipta dilindungi.'
@@ -373,44 +299,6 @@
                         { title: 'Kamus Bahasa Daerah', description: 'Kamus Bahasa Daerah Delha - Oenale Rote', image: './projects/kamus.png', link: 'https://yufri28.github.io/kamus.html' },
                         { title: 'Sistem Konsultasi Online', description: 'Sistem konsultasi bersama konselor dengan chat realtime.', image: './projects/temanbaomong.png', link: 'https://temanbaomong.lp2mundana.com' },
                         { title: 'Sistem Angkut Sampah', description: 'Sistem pelaporan dan pengankutan sampah.', image: './projects/pickme.png', link: 'https://pickme.lp2mundana.com' }
-                    ],
-                    articles: [
-                        {
-                            titleId: 'Klarifikasi Hoaks di Lingkungan Sekitar: Menjadi Juru Damai Informasi',
-                            titleEn: 'Clarifying Misinformation Locally: Becoming an Information Peacemaker',
-                            descId: 'Panduan taktis mendeteksi berita bohong, menahan laju penyebaran hoaks di grup obrolan terdekat, serta metode Tabayyun yang elegan demi menjaga harmoni komunitas.',
-                            descEn: 'A tactical guide to detecting fake news, halting misinformation in close chat groups, and elegant verification methods to maintain community harmony.',
-                            categoryId: 'Literasi Digital',
-                            categoryEn: 'Digital Literacy',
-                            date: 'Jul 03, 2026',
-                            readTime: '4 min read',
-                            image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1200&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/hoax-clarification.html' // Sesuaikan dengan struktur link internal Anda
-                        },
-                        {
-                            titleId: 'Etika Penggunaan AI Berdasarkan Nilai Luhur Pancasila',
-                            titleEn: 'AI Ethics Rooted in National Values and Pancasila Principles',
-                            descId: 'Menavigasi pesatnya teknologi Artificial Intelligence tanpa kehilangan identitas nasional. Mengupas integritas data, reduksi bias algoritma, dan keadilan digital.',
-                            descEn: 'Navigating the rapid expansion of Artificial Intelligence without losing national identity. Exploring data integrity, reducing algorithmic bias, and digital justice.',
-                            categoryId: 'Etika Teknologi',
-                            categoryEn: 'Tech Ethics',
-                            date: 'Jun 28, 2026',
-                            readTime: '5 min read',
-                            image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=600&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/ai-ethics.html' // Sesuaikan dengan struktur link internal Anda
-                        },
-                        {
-                            titleId: 'Panduan Identifikasi Deepfake & Disinformasi AI',
-                            titleEn: 'A Guide to Identifying Deepfakes and AI-Generated Disinformation',
-                            descId: 'Bagaimana teknologi kecerdasan buatan memanipulasi realitas visual kita, dan langkah konkret apa yang bisa kita ambil untuk tetap aman dari penipuan digital.',
-                            descEn: 'How artificial intelligence technology manipulates our visual reality, and what concrete steps we can take to stay safe from digital deception.',
-                            categoryId: 'Panduan Edukasi',
-                            categoryEn: 'Educational Guides',
-                            date: 'Jul 08, 2026',
-                            readTime: '6 min read',
-                            image: 'https://images.unsplash.com/photo-1695548111300-5a80c7bf9eaa?auto=format&fit=crop&w=600&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/deepfake-guide.html' // Sesuaikan dengan struktur link internal Anda
-                        }
                     ],
                     visibleProjects: [], // Untuk load more
                     form: { name: '', email: '', message: '' }
@@ -456,7 +344,7 @@
                             }
                         });
                     });
-                    ['hero', 'about', 'skills', 'projects', 'articles'].forEach(ref => {
+                    ['hero', 'about', 'skills', 'projects'].forEach(ref => {
                         if (this.$refs[ref]) observer.observe(this.$refs[ref]);
                     });
                 }
