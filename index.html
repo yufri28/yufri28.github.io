@@ -8,18 +8,45 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <script>
-        // Konfigurasi Tailwind untuk dark mode via class
+        // Konfigurasi Tailwind untuk dark mode via class dan Neo Brutalism
         tailwind.config = {
-            darkMode: 'class'
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neo: {
+                            primary: '#93c5fd', // Soft Blue
+                            secondary: '#e2e8f0', // Slate 200
+                            accent: '#fde047', // Soft Yellow
+                            bg: '#f8fafc',
+                            darkbg: '#0f172a',
+                            card: '#ffffff',
+                            darkcard: '#1e293b'
+                        }
+                    },
+                    boxShadow: {
+                        'neo': '5px 5px 0px 0px rgba(0,0,0,1)',
+                        'neo-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+                        'neo-dark': '5px 5px 0px 0px rgba(255,255,255,1)',
+                        'neo-dark-hover': '2px 2px 0px 0px rgba(255,255,255,1)'
+                    }
+                }
+            }
         }
     </script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
         /* Custom animations */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
         .fade-in.visible {
@@ -27,75 +54,89 @@
             transform: translateY(0);
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #2C5364 0%, #0F2027 100%);
+        .neo-border {
+            border: 4px solid #000;
         }
 
-        /* Animasi card skills & articles */
-        .skill-card,
-        .article-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .dark .neo-border {
+            border: 4px solid #fff;
         }
 
-        .skill-card:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .neo-card {
+            transition: all 0.2s ease-in-out;
         }
 
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        .neo-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1) !important;
+        }
+
+        .dark .neo-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1) !important;
+        }
+
+        .neo-button {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .neo-button:active {
+            transform: translate(5px, 5px);
+            box-shadow: none !important;
         }
     </style>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+<body class="bg-neo-bg dark:bg-neo-darkbg text-black dark:text-white transition-colors duration-300 overflow-x-hidden">
     <div id="app" class="min-h-screen">
         <!-- Header / Navigation -->
-        <header class="fixed top-0 w-full bg-white dark:bg-gray-800 shadow-lg z-50 transition-colors duration-300">
-            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ translations[currentLang].name }}
+        <header
+            class="fixed top-0 w-full bg-neo-bg dark:bg-neo-darkbg neo-border border-b-[4px] border-black dark:border-white z-50 transition-colors duration-300">
+            <nav class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+                <h1 class="text-xl md:text-3xl font-black uppercase tracking-widest text-black dark:text-white">{{
+                    translations[currentLang].name }}
                 </h1>
-                <ul class="hidden md:flex space-x-6">
-                    <li><a href="#hero" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
+                <ul class="hidden lg:flex space-x-6 font-bold text-black dark:text-white">
+                    <li><a href="#hero" class="hover:underline decoration-4 underline-offset-4">{{
                             translations[currentLang].nav.home }}</a></li>
-                    <li><a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
+                    <li><a href="#about" class="hover:underline decoration-4 underline-offset-4">{{
                             translations[currentLang].nav.about }}</a></li>
-                    <li><a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
+                    <li><a href="#skills" class="hover:underline decoration-4 underline-offset-4">{{
                             translations[currentLang].nav.skills }}</a></li>
-                    <li><a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
+                    <li><a href="#projects" class="hover:underline decoration-4 underline-offset-4">{{
                             translations[currentLang].nav.projects }}</a></li>
-                    <li><a href="#articles" class="hover:text-blue-600 dark:hover:text-blue-400 transition">{{
+                    <li><a href="#articles" class="hover:underline decoration-4 underline-offset-4">{{
                             translations[currentLang].nav.articles }}</a></li>
                 </ul>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2 sm:space-x-4">
                     <a href="https://github.com/yufri28" target="_blank"
-                        class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        class="p-1.5 md:p-2 bg-neo-card dark:bg-neo-darkcard text-black dark:text-white neo-border shadow-neo dark:shadow-neo-dark neo-button">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                     </a>
                     <a href="https://instagram.com/yufrii__" target="_blank"
-                        class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        class="p-1.5 md:p-2 bg-neo-card dark:bg-neo-darkcard text-black dark:text-white neo-border shadow-neo dark:shadow-neo-dark neo-button">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
                     </a>
                     <button @click="toggleLanguage"
-                        class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                        <span class="text-sm font-semibold">{{ currentLang.toUpperCase() }}</span>
+                        class="p-1.5 md:p-2 bg-neo-card dark:bg-neo-darkcard text-black dark:text-white neo-border shadow-neo dark:shadow-neo-dark neo-button">
+                        <span class="text-xs md:text-sm font-bold">{{ currentLang.toUpperCase() }}</span>
                     </button>
                     <button @click="toggleDarkMode"
-                        class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-                        <svg v-if="!isDark" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="p-1.5 md:p-2 bg-neo-card dark:bg-neo-darkcard text-black dark:text-white neo-border shadow-neo dark:shadow-neo-dark neo-button">
+                        <svg v-if="!isDark" class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
                             </path>
                         </svg>
-                        <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <svg v-else class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                 d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
                             </path>
                         </svg>
@@ -105,147 +146,164 @@
         </header>
 
         <!-- Hero Section -->
-        <section id="hero" class="gradient-bg text-white min-h-screen flex items-center px-6 pt-24">
-            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center fade-in" ref="hero">
-
+        <section id="hero"
+            class="bg-neo-secondary dark:bg-slate-800 border-b-[4px] border-black dark:border-white min-h-screen flex items-center px-4 md:px-6 pt-28 md:pt-24">
+            <div class="container mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center fade-in" ref="hero">
                 <!-- Text -->
-                <div class="text-center md:text-left">
-                    <span class="inline-block mb-4 px-4 py-1 text-sm rounded-full bg-white/20 backdrop-blur">
+                <div class="text-center md:text-left order-2 md:order-1">
+                    <span
+                        class="inline-block mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-bold bg-neo-accent dark:bg-yellow-600 text-black neo-border shadow-neo dark:shadow-neo-dark uppercase tracking-wider">
                         👋 Software Engineer
                     </span>
-
-
-                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                    <h1
+                        class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-4 md:mb-6 tracking-tight uppercase">
                         {{ translations[currentLang].hero.title }}
                     </h1>
-
-                    <p class="text-lg md:text-xl text-gray-200 mb-8">
+                    <p
+                        class="text-base md:text-2xl font-bold mb-8 md:mb-10 bg-neo-card dark:bg-neo-darkcard inline-block p-2 md:p-3 neo-border shadow-neo dark:shadow-neo-dark">
                         {{ translations[currentLang].hero.subtitle }}
                     </p>
-
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a href="#projects"
-                            class="bg-white text-blue-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                            class="bg-neo-primary dark:bg-blue-600 px-4 py-3 md:px-8 md:py-4 font-black text-base md:text-lg neo-border shadow-neo dark:shadow-neo-dark neo-button text-black dark:text-white uppercase tracking-wider w-full sm:w-auto text-center">
                             {{translations[currentLang].projects.view }}
                         </a>
                         <a href="#about"
-                            class="border border-white/60 px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition">
+                            class="bg-neo-card dark:bg-neo-darkcard px-4 py-3 md:px-8 md:py-4 font-black text-base md:text-lg neo-border shadow-neo dark:shadow-neo-dark neo-button text-black dark:text-white uppercase tracking-wider w-full sm:w-auto text-center">
                             {{translations[currentLang].about.title }}
                         </a>
                         <a href="./index-old.html"
-                            class="border border-white/60 px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition">
+                            class="bg-neo-card dark:bg-neo-darkcard px-4 py-3 md:px-8 md:py-4 font-black text-base md:text-lg neo-border shadow-neo dark:shadow-neo-dark neo-button text-black dark:text-white uppercase tracking-wider w-full sm:w-auto text-center">
                             {{translations[currentLang].nav.old_web }}
                         </a>
                     </div>
                 </div>
 
                 <!-- Image -->
-                <div class="flex justify-center mb-10 md:justify-end">
-                    <div class="relative w-78 h-78 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <div class="flex justify-center mb-6 md:mb-10 md:justify-end order-1 md:order-2">
+                    <div
+                        class="relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[450px] lg:h-[450px] neo-border shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] overflow-hidden bg-neo-primary">
                         <img src="./foto-hero.jpg" alt="Professional Web Developer" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- About Section -->
-        <section id="about" class="py-20 px-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <section id="about"
+            class="py-16 md:py-24 px-4 md:px-6 bg-neo-bg dark:bg-neo-darkbg border-b-[4px] border-black dark:border-white transition-colors duration-300">
             <div class="container mx-auto max-w-4xl fade-in" ref="about">
-                <h2 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">{{
-                    translations[currentLang].about.title }}</h2>
-                <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">{{
-                    translations[currentLang].about.description }}</p>
+                <div
+                    class="bg-neo-secondary dark:bg-slate-800 neo-border shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] p-6 md:p-16">
+                    <h2
+                        class="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-6 md:mb-10 uppercase tracking-widest">
+                        {{
+                        translations[currentLang].about.title }}</h2>
+                    <p
+                        class="text-lg md:text-2xl lg:text-3xl leading-relaxed font-bold border-l-4 md:border-l-8 border-black dark:border-white pl-4 md:pl-6">
+                        {{
+                        translations[currentLang].about.description }}</p>
+                </div>
             </div>
         </section>
 
         <!-- Language and Tools Section -->
-        <section id="skills" class="py-20 px-6 bg-white dark:bg-gray-800 transition-colors duration-300">
-            <div class="container mx-auto max-w-4xl fade-in" ref="skills">
-                <h2 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">{{
+        <section id="skills"
+            class="py-16 md:py-24 px-4 md:px-6 bg-neo-secondary dark:bg-slate-800 border-b-[4px] border-black dark:border-white transition-colors duration-300">
+            <div class="container mx-auto max-w-6xl fade-in" ref="skills">
+                <h2
+                    class="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-10 md:mb-16 uppercase tracking-widest">
+                    {{
                     translations[currentLang].skills.title }}</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
                     <div v-for="skill in skills" :key="skill.name"
-                        class="skill-card bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
-                        <span class="iconify text-5xl mb-4 mx-auto" :data-icon="skill.icon"
+                        class="bg-neo-card dark:bg-neo-darkcard p-4 sm:p-6 md:p-8 neo-border shadow-neo dark:shadow-neo-dark neo-card flex flex-col items-center justify-center">
+                        <span class="iconify text-5xl md:text-7xl mb-4 md:mb-6" :data-icon="skill.icon"
                             :style="{ color: skill.color }"></span>
-                        <h3 class="text-lg font-semibold">{{ skill.name }}</h3>
+                        <h3 class="text-sm sm:text-base md:text-xl font-bold text-center uppercase">{{ skill.name }}
+                        </h3>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20 px-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-            <div class="container mx-auto max-w-6xl fade-in" ref="projects">
-                <h2 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">{{
+        <section id="projects"
+            class="py-16 md:py-24 px-4 md:px-6 bg-neo-bg dark:bg-neo-darkbg border-b-[4px] border-black dark:border-white transition-colors duration-300">
+            <div class="container mx-auto max-w-7xl fade-in" ref="projects">
+                <h2
+                    class="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-10 md:mb-16 uppercase tracking-widest text-black dark:text-white">
+                    {{
                     translations[currentLang].projects.title }}</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
                     <div v-for="(project, index) in visibleProjects" :key="project.title"
-                        class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
-                        <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover rounded mb-4">
-                        <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">{{ project.description }}</p>
+                        class="bg-neo-card dark:bg-neo-darkcard p-4 md:p-6 neo-border shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] neo-card flex flex-col">
+                        <div class="neo-border mb-4 md:mb-6 overflow-hidden h-48 md:h-56">
+                            <img :src="project.image" :alt="project.title" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-black mb-3 md:mb-4 uppercase">{{ project.title }}</h3>
+                        <p class="font-bold text-base md:text-lg mb-6 md:mb-8 flex-grow">{{ project.description }}</p>
                         <a target="_blank" :href="project.link"
-                            class="text-blue-600 dark:text-blue-400 hover:underline">{{
-                            translations[currentLang].projects.view }}</a>
+                            class="block text-center bg-neo-primary dark:bg-blue-600 px-4 py-3 md:px-6 md:py-4 font-black text-base md:text-lg neo-border shadow-neo dark:shadow-neo-dark neo-button text-black dark:text-white uppercase w-full">
+                            {{ translations[currentLang].projects.view }}
+                        </a>
                     </div>
                 </div>
-                <div v-if="projects.length > 3 && visibleProjects.length < projects.length" class="text-center mt-8">
+                <div v-if="projects.length > 3 && visibleProjects.length < projects.length"
+                    class="text-center mt-12 md:mt-16">
                     <button @click="loadMoreProjects"
-                        class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition">{{
-                        translations[currentLang].projects.loadMore }}</button>
+                        class="bg-neo-accent dark:bg-yellow-600 px-6 py-3 md:px-10 md:py-5 text-lg md:text-2xl font-black neo-border shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] neo-button text-black dark:text-white uppercase tracking-wider w-full sm:w-auto">
+                        {{ translations[currentLang].projects.loadMore }}
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- Articles / Blog Section -->
-        <section id="articles" class="py-20 px-6 bg-white dark:bg-gray-800 transition-colors duration-300">
-            <div class="container mx-auto max-w-5xl fade-in" ref="articles">
-                <h2 class="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-gray-100">
+        <section id="articles"
+            class="py-16 md:py-24 px-4 md:px-6 bg-neo-secondary dark:bg-slate-800 border-b-[4px] border-black dark:border-white transition-colors duration-300">
+            <div class="container mx-auto max-w-6xl fade-in" ref="articles">
+                <h2
+                    class="text-3xl md:text-5xl lg:text-6xl font-black text-center mb-6 md:mb-8 uppercase tracking-widest text-black dark:text-white">
                     {{ translations[currentLang].articles.title }}
                 </h2>
-                <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                <p
+                    class="text-center font-bold text-base md:text-2xl mb-10 md:mb-16 max-w-3xl mx-auto text-black dark:text-white bg-neo-card dark:bg-neo-darkcard p-3 md:p-4 neo-border shadow-neo dark:shadow-neo-dark">
                     {{ translations[currentLang].articles.subtitle }}
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div v-for="article in articles" :key="article.titleEn"
-                        class="article-card bg-gray-50 dark:bg-gray-700 rounded-xl overflow-hidden shadow-md flex flex-col justify-between">
-                        <div>
-                            <div class="relative h-52 bg-gray-200 dark:bg-gray-600 overflow-hidden">
-                                <img :src="article.image"
-                                    :alt="currentLang === 'en' ? article.titleEn : article.titleId"
-                                    class="w-full h-full object-cover">
-                                <span
-                                    class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
-                                    {{ currentLang === 'en' ? article.categoryEn : article.categoryId }}
+                        class="bg-neo-card dark:bg-neo-darkcard neo-border shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] neo-card flex flex-col">
+                        <div class="relative h-48 md:h-64 neo-border border-b-[4px] m-3 md:m-4 overflow-hidden">
+                            <img :src="article.image" :alt="currentLang === 'en' ? article.titleEn : article.titleId"
+                                class="w-full h-full object-cover">
+                            <span
+                                class="absolute top-3 left-3 md:top-4 md:left-4 bg-neo-accent dark:bg-yellow-600 text-black text-xs md:text-sm font-black px-3 py-1.5 md:px-4 md:py-2 neo-border shadow-neo dark:shadow-neo-dark uppercase">
+                                {{ currentLang === 'en' ? article.categoryEn : article.categoryId }}
+                            </span>
+                        </div>
+                        <div class="px-4 pb-4 pt-2 md:px-8 md:pb-8 md:pt-4 flex flex-col flex-grow">
+                            <div
+                                class="flex items-center font-bold text-sm md:text-base mb-4 md:mb-6 space-x-4 md:space-x-6 border-b-4 border-black dark:border-white pb-3 md:pb-4">
+                                <span class="flex items-center gap-1.5 md:gap-2">
+                                    <span class="iconify text-lg md:text-xl" data-icon="clarity:calendar-solid"></span>
+                                    {{ article.date }}
+                                </span>
+                                <span class="flex items-center gap-1.5 md:gap-2">
+                                    <span class="iconify text-lg md:text-xl" data-icon="clarity:clock-solid"></span> {{
+                                    article.readTime }}
                                 </span>
                             </div>
-                            <div class="p-6">
-                                <div class="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-3 space-x-4">
-                                    <span class="flex items-center gap-1">
-                                        <span class="iconify" data-icon="clarity:calendar-line"></span> {{ article.date
-                                        }}
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <span class="iconify" data-icon="clarity:clock-line"></span> {{ article.readTime
-                                        }}
-                                    </span>
-                                </div>
-                                <h3
-                                    class="text-xl font-bold mb-3 text-gray-900 dark:text-gray-100 line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition">
-                                    {{ currentLang === 'en' ? article.titleEn : article.titleId }}
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3 mb-4">
-                                    {{ currentLang === 'en' ? article.descEn : article.descId }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="px-6 pb-6 pt-2">
+                            <h3 class="text-xl md:text-3xl font-black mb-3 md:mb-4 line-clamp-2 uppercase">
+                                {{ currentLang === 'en' ? article.titleEn : article.titleId }}
+                            </h3>
+                            <p class="font-bold text-sm md:text-lg leading-relaxed line-clamp-3 mb-6 md:mb-8 flex-grow">
+                                {{ currentLang === 'en' ? article.descEn : article.descId }}
+                            </p>
                             <a :href="article.link"
-                                class="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition gap-1">
+                                class="inline-flex items-center justify-center bg-neo-primary dark:bg-blue-600 px-4 py-3 md:px-6 md:py-4 font-black text-base md:text-xl neo-border shadow-neo dark:shadow-neo-dark neo-button text-black dark:text-white gap-2 md:gap-3 uppercase w-full">
                                 {{ translations[currentLang].articles.readMore }}
-                                <span class="iconify text-lg" data-icon="line-md:arrow-small-right"></span>
+                                <span class="iconify text-xl md:text-2xl" data-icon="line-md:arrow-small-right"></span>
                             </a>
                         </div>
                     </div>
@@ -254,8 +312,10 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-gray-800 dark:bg-gray-900 text-white py-6 px-6 text-center">
-            <p>&copy; 2026 {{ translations[currentLang].name }}. {{ translations[currentLang].footer.rights }}</p>
+        <footer
+            class="bg-black text-white dark:bg-black py-6 md:py-10 px-4 md:px-6 text-center border-t-[8px] border-black dark:border-white">
+            <p class="font-bold text-sm md:text-xl uppercase tracking-widest">&copy; 2026 {{
+                translations[currentLang].name }}. {{ translations[currentLang].footer.rights }}</p>
         </footer>
     </div>
 
@@ -386,8 +446,8 @@
                             categoryEn: 'Digital Literacy',
                             date: 'Jul 03, 2026',
                             readTime: '4 min read',
-                            image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1200&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/hoax-clarification.html' // Sesuaikan dengan struktur link internal Anda
+                            image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1200&q=80',
+                            link: './articles/hoax-clarification.html'
                         },
                         {
                             titleId: 'Etika Penggunaan AI Berdasarkan Nilai Luhur Pancasila',
@@ -398,8 +458,8 @@
                             categoryEn: 'Tech Ethics',
                             date: 'Jun 28, 2026',
                             readTime: '5 min read',
-                            image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=600&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/ai-ethics.html' // Sesuaikan dengan struktur link internal Anda
+                            image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=600&q=80',
+                            link: './articles/ai-ethics.html'
                         },
                         {
                             titleId: 'Panduan Identifikasi Deepfake & Disinformasi AI',
@@ -410,8 +470,8 @@
                             categoryEn: 'Educational Guides',
                             date: 'Jul 08, 2026',
                             readTime: '6 min read',
-                            image: 'https://images.unsplash.com/photo-1695548111300-5a80c7bf9eaa?auto=format&fit=crop&w=600&q=80', // Sesuaikan dengan path aset gambar Anda
-                            link: './articles/deepfake-guide.html' // Sesuaikan dengan struktur link internal Anda
+                            image: 'https://images.unsplash.com/photo-1695548111300-5a80c7bf9eaa?auto=format&fit=crop&w=600&q=80',
+                            link: './articles/deepfake-guide.html'
                         }
                     ],
                     visibleProjects: [], // Untuk load more
