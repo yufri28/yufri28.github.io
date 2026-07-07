@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Identifikasi Deepfake & Disinformasi AI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <span class="font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                </svg>
+                Literasi AI
+            </span>
+            <nav class="text-sm font-medium text-slate-500">
+                <span>Panduan Edukasi</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 py-12 md:py-16">
+
+        <!-- Article Intro -->
+        <article>
+            <header class="mb-12">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-600 mb-3">
+                    <span>Edukasi Teknologi</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                    <span class="text-slate-500">6 Menit Baca</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                    Melihat Tidak Lagi Mempercayai: Panduan Mengidentifikasi Deepfake & Disinformasi AI
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed font-light">
+                    Bagaimana teknologi kecerdasan buatan memanipulasi realitas visual kita, dan langkah konkret apa
+                    yang bisa kita ambil untuk tetap aman dari penipuan digital.
+                </p>
+                <div class="mt-6 pt-6 border-t border-slate-100 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold text-sm">
+                        RA
+                    </div>
+                    <div>
+                        <span class="block text-sm font-semibold text-slate-900">Rangkuman Artikel</span>
+                        <span class="block text-xs text-slate-400">Diperbarui 8 Juli 2026</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Section 1: Tantangan -->
+            <section class="prose prose-slate max-w-none mb-12">
+                <div
+                    class="p-6 bg-gradient-to-br from-brand-900 to-slate-900 text-white rounded-2xl shadow-xl shadow-brand-900/10 mb-8">
+                    <h2 class="text-xl font-bold mb-3 flex items-center gap-2 text-brand-100">
+                        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                            </path>
+                        </svg>
+                        1. Tantangan Baru di Era Generative AI
+                    </h2>
+                    <p class="text-slate-200 leading-relaxed text-sm md:text-base">
+                        Teknologi AI saat ini mampu menciptakan video yang sangat nyata hanya berdasarkan instruksi teks
+                        (<span class="text-brand-300 font-medium">text-to-video</span>) menggunakan model mutakhir
+                        seperti <strong class="text-white">Sora</strong> atau <strong
+                            class="text-white">Runway</strong>. Lompatan teknologi ini membuat jargon lama "melihat
+                        adalah mempercayai" kini tidak lagi berlaku.
+                    </p>
+                    <div class="mt-4 p-4 bg-white/10 rounded-xl border border-white/10 flex items-center gap-4">
+                        <span class="text-3xl md:text-4xl font-black text-brand-400">90%</span>
+                        <p class="text-xs md:text-sm text-slate-200 m-0">
+                            Orang gagal mendeteksi video deepfake dalam sekali lihat. Celah inilah yang dimanfaatkan
+                            oleh pelaku kejahatan digital untuk menyebarkan hoaks atau melakukan penipuan massal.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Identifikasi Visual -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-2">2. Teknik Identifikasi Visual</h2>
+                <p class="text-slate-600 mb-6 text-sm md:text-base">Berdasarkan riset dan analisis forensik digital, ada
+                    tiga langkah utama untuk mendeteksi manipulasi AI pada konten video:</p>
+
+                <div class="space-y-6">
+                    <!-- Item 1 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm flex gap-4 items-start">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 font-bold text-sm">
+                            A</div>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Analisis Segitiga Wajah</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Periksa gerakan bibir subjek. Pada video AI, gerakan ini sering kali tidak sinkron
+                                dengan otot pipi, leher, atau dagu. Perhatikan juga ritme kedipan mata yang tidak alami
+                                serta tatapan mata yang cenderung kosong atau kaku (<span
+                                    class="italic text-slate-900 font-medium">dead eyes</span>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm flex gap-4 items-start">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 font-bold text-sm">
+                            B</div>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Ketidakkonsistenan Visual (Glitch)</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Amati dengan jeli area tepi wajah seperti telinga dan garis rahang. Pada video AI, area
+                                ini sering kali terlihat kabur, patah, atau bergetar (<span
+                                    class="italic text-slate-900 font-medium">glitch</span>) saat subjek bergerak cepat.
+                                Waspadai juga video berkualitas rendah atau penuh <span class="italic">noise</span> yang
+                                sengaja ditambahkan untuk menyamarkan cacat visual AI.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm flex gap-4 items-start">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 font-bold text-sm">
+                            C</div>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 mb-1">Analisis Fisika dan Lingkungan</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Periksa arah pencahayaan. Jika arah sumber lampu dan bayangan yang jatuh pada wajah
+                                tidak konsisten, itu pertanda kuat adanya manipulasi. Perhatikan juga fenomena <span
+                                    class="italic text-slate-900 font-medium">morphing</span>, di mana objek latar
+                                belakang (seperti gedung, tiang, atau pohon) tiba-tiba berubah bentuk atau bergerak
+                                tidak stabil saat kamera bergeser.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Preventif -->
+            <section class="mb-12 bg-slate-100/80 border border-slate-200 p-6 md:p-8 rounded-2xl">
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight mb-2">3. Langkah Preventif Menghadapi
+                    Disinformasi</h2>
+                <p class="text-slate-600 mb-6 text-sm md:text-base">Agar tidak menjadi korban kriminalitas siber maupun
+                    penyebaran hoaks berbasis AI, terapkan protokol keamanan berikut:</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">Protokol
+                            01</span>
+                        <h4 class="font-bold text-slate-900 mb-2">Stop, Think, Check</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Jangan langsung bereaksi secara emosional atau panik terhadap konten yang tidak masuk akal
+                            (misalnya video tokoh publik yang tiba-tiba membagikan uang atau hadiah gratis).
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider block mb-1">Protokol
+                            02</span>
+                        <h4 class="font-bold text-slate-900 mb-2">Cross-check Jalur Lain</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Jika menerima video dari kerabat yang mendesak meminta bantuan finansial, segera telepon
+                            langsung via jalur seluler konvensional. Ajukan pertanyaan pribadi yang mustahil diketahui
+                            oleh dataset AI untuk memverifikasi identitas asli mereka.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-rose-600 uppercase tracking-wider block mb-1">Protokol
+                            03</span>
+                        <h4 class="font-bold text-slate-900 mb-2">Waspada Red Flags</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Segera hapus atau abaikan konten digital yang memaksa Anda bertindak terburu-buru,
+                            menciptakan urgensi palsu, atau meminta Anda mengklik tautan (link) asing yang mencurigakan.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200">
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Protokol
+                            04</span>
+                        <h4 class="font-bold text-slate-900 mb-2">Lindungi Data Biometrik</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Jangan pernah mengirimkan data biometrik, rekaman suara berkualitas tinggi, atau video wajah
+                            detail kepada pihak tidak dikenal. Data tersebut dapat dicuri untuk melatih (<span
+                                class="italic">training</span>) model AI guna meniru identitas Anda di masa depan.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <footer class="border-t border-slate-200 pt-8 mt-8">
+                <div class="bg-brand-50 border border-brand-100 rounded-xl p-6">
+                    <h3 class="text-sm font-bold text-brand-900 uppercase tracking-wider mb-2">Kesimpulan</h3>
+                    <p class="text-sm md:text-base text-brand-950 leading-relaxed italic m-0">
+                        "Meskipun teknologi kecerdasan buatan semakin pintar dalam memanipulasi realitas, pemahaman
+                        mendalam kita terhadap detail fisik manusia dan hukum alam tetap menjadi kunci utama untuk
+                        membedakan mana konten yang orisinal dan mana yang hasil rekayasa."
+                    </p>
+                </div>
+            </footer>
+        </article>
+
+    </main>
+
+    <!-- Footer Page -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8 text-center text-xs text-slate-400">
+        <div class="max-w-4xl mx-auto px-4">
+            <p>&copy; 2026 Ringkasan Pembelajaran Digital. Dibuat untuk dipublikasikan melalui GitHub Pages.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
